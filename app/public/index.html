@@ -1,0 +1,217 @@
+<!DOCTYPE html><html lang="en"><head>
+    <script src="p5.js"></script>
+    <script src="p5.sound.min.js"></script>
+<link href="https://cdn.jsdelivr.net/npm/tom-select@2.0.1/dist/css/tom-select.bootstrap5.css" rel="stylesheet">
+<script src="tom-select.complete.min.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <meta charset="utf-8">
+
+  </head>
+  <body>
+
+    
+  <script src="templateActions.js"></script>
+  <script src="sketch.js"></script>
+  <script src="oceco.js"></script>
+
+
+
+
+
+<div id="event" class="modal">
+  <span onclick="resetOcecoPanel()" class="close" title="Close Modal">×</span>
+  <form class="modal-content">
+    <div class="container" id="container">
+      <h1 id="titreFenetre">Créer un événement et ses actions Oceco</h1>
+      <hr>
+      <div>  
+      <h2 id="titreEvent">Nom de l'événement</h2>
+      </div>
+      
+<!-- Communs aux evenements  -->
+      <label for="selectPole"><b>Evénement dans le pôle</b></label>
+      <select id="selectPole" name="selectPole" placeholder="choisir un pole" autocomplete="on" required="">
+        <optgroup label="Fréquents">
+          <option value="5e4d842d690864aa088b4b01">Café culturel</option>
+          <option value="5bdc957640bb4e9e79eefccb">Chantier participatif</option>
+		</optgroup>
+        <optgroup label="Jardin">
+          <option value="5fae4a346908644d478b45b1">Champignonière</option>
+          <option value="6172b0c519ba2c0a750c5c4a">Pépinière</option>
+          <option value="5e4232ec69086452078b46d0">Potager</option>
+          <option value="5fae47bc6908644d478b4598">Rucher</option>
+          <option value="5e650e3469086440318b45b3">Serre aquaponique</option>
+          <option value="5e4ff86a69086495528b4592">Micro-Forêt</option>
+		</optgroup>
+        <optgroup label="Culture">
+          <option value="6208fa07506b8728f321fd55">Groupe Culture</option>
+          <option value="5e4d842d690864aa088b4b01">Café culturel</option>
+          <option value="6208f7f761387739e675f98a">Culture Lab</option>
+          <option value="5bd2bcfb40bb4e4509f7eabe">AMAC</option>
+          <option value="5c03d0a140bb4eba4549a633">Cinéma plein air</option>
+          <option value="615d60cef1ddbd5bb32ce698">MédiaLab</option>
+		</optgroup>
+        <optgroup label="Collaboratif">
+          <option value="5bd2bfa640bb4ecb09f7eabe">AMAP</option>
+   		</optgroup>
+        <optgroup label="Les Communs">
+          <option value="5fae52a769086444478b45cc">Interpoles</option>
+          <option value="5df793ee690864ad568b45e1">La Poule Comm</option>
+          <option value="5c5862dd40bb4e591f69a820">Les outils numériques</option>
+          <option value="5c461b1140bb4ed64e123ae8">Travaux</option>
+   		</optgroup>
+        <optgroup label="Micro-Recyclerie">
+          <option value="615f4ebc4ebb2837582d8a66">Textile</option>
+          <option value="615d7ac26beb295c7d13f65f">Vélo</option>
+          <option value="615d8cba2ed88434fa27e349">Fablab</option>
+          <option value="5bdc957640bb4e9e79eefccb">Chantier participatif</option>
+
+   		</optgroup>
+        <optgroup label="CA">
+          <option value="5be5d3f340bb4e3848ef67f3">Conseil d'administration</option>
+   		</optgroup>
+
+
+
+      </select>
+      <br>
+      <label for="débuteà"><b>Débute à</b></label>
+      <input type="time" id="débuteà" required="">
+      <label for="termineà"><b>et termine à</b></label>
+      <input type="time" id="termineà" required=""><br>
+      
+      <label for="desc"><b>Description de l'événement</b></label><br>
+      <textarea id="desc" width="100" required=""></textarea><br>
+      
+      <hr>
+      
+      <!-- ACTIONS  -->
+      <!----------------------------->
+        <script>
+
+        function creerDiv(value, key, map) {
+          //console.log(`m[${key}] = ${value}`);
+          var div = document.createElement('div');
+          div.setAttribute('id', `actions${key}`);
+
+          div.innerHTML = `
+           <h2 >Les actions Oceco pour la ${key}</h2>
+          `;
+         
+          for (const [index, poste] of value.entries()) {
+            div.innerHTML += `
+            <div style="display: flex; flex-flow: row wrap; align-items: center;" >
+<label for="Switch__${key}__${poste.slug}" style="font-size:12px; margin-left:-10px">${poste.slug}<br>            
+<label class="switch" ><input type="checkbox" checked id="Switch__${key}__${poste.slug}" data-event-type=${key} data-poste=${poste.slug} data-index=${index}>
+              <span class="slider round" ></span></label>  </label>  
+              <div class='action' id="actionDiv${key}${poste.slug}" data-event-type=${key} data-poste=${poste.slug} data-index=${index}>
+                <label style='font-size:14px' for="actionDiv${key}${poste.slug}Nom"><b>L'action</b></label>
+                <input type="text" style='width:70%' placeholder="Nom de l'action ${poste.slug}" id="actionDiv${key}${poste.slug}Nom" data-var="name" required><br>
+
+
+                <label for="actionDiv${key}${poste.slug}Moitie" id=actionDivLabel${key}${poste.slug}Moitie>L'action nécessite 2 équipes</label>
+                <input type="checkbox" checked id="actionDiv${key}${poste.slug}Moitie" data-event-type=${key} data-poste=${poste.slug} data-index=${index} required>
+<br>
+
+
+                <label for="actionDiv${key}${poste.slug}Débuteà"><b>Débute à</b></label>
+                <input type="time" id="actionDiv${key}${poste.slug}Débuteà" data-var="startHour" required>
+                <label for="actionDiv${key}${poste.slug}Termineà"><b>et termine à</b></label>
+                <input type="time" id="actionDiv${key}${poste.slug}Termineà" data-var="endHour" required><br>
+                <label for="actionDiv${key}${poste.slug}Mini"><b>Entre</b></label>
+                <input type="number" id="actionDiv${key}${poste.slug}Mini" data-var="min" required>
+                <label for="actionDiv${key}${poste.slug}Maxi"><b>et</b></label>
+                <input type="number" id="actionDiv${key}${poste.slug}Maxi" data-var="max" required>
+                volontaires
+                <label for="actionDiv${key}${poste.slug}Credits"><b>gagent</b></label>
+                <input type="number" id="actionDiv${key}${poste.slug}Credits" data-var="credits" required> crédits<br/>
+                <label for="actionDiv${key}${poste.slug}Desc"><b>Description de l'action</b></label><br/>
+                <textarea id="actionDiv${key}${poste.slug}Desc" width="100" data-var="description" required></textarea><br/>
+              </div>  
+              
+              <div class='action moitie-2' id="actionDiv${key}${poste.slug}-2" data-event-type=${key} data-poste=${poste.slug} data-index=${index}>
+                <p><label style='font-size:14px'><b>Deuxième équipe ${poste.slug}</b></label></p>
+                <label for="actionDiv${key}${poste.slug}Débuteà-2"><b>Débute à</b></label>
+                <input type="time" id="actionDiv${key}${poste.slug}Débuteà-2" data-var="startHour2" required>
+                <label for="actionDiv${key}${poste.slug}Termineà-2"><b>et termine à</b></label>
+                <input type="time" id="actionDiv${key}${poste.slug}Termineà-2" data-var="endHour2" required><br>
+                <label for="actionDiv${key}${poste.slug}Mini-2"><b>Entre</b></label>
+                <input type="number" id="actionDiv${key}${poste.slug}Mini-2" data-var="min2" required>
+                <label for="actionDiv${key}${poste.slug}Maxi-2"><b>et</b></label>
+                <input type="number" id="actionDiv${key}${poste.slug}Maxi-2" data-var="max2" required>
+                volontaires
+                <label for="actionDiv${key}${poste.slug}Credits-2"><b>gagent</b></label>
+                <input type="number" id="actionDiv${key}${poste.slug}Credits-2" data-var="credits2" required> crédits<br/>
+              </div>
+            </div> 
+            `;
+          }
+          
+          
+          document.getElementById('container').appendChild(div);
+
+        }
+          
+        template.forEach(creerDiv);
+
+
+
+   /*     
+     <!-- Soirée  -->
+      <div id="actionsSoirée" >
+        <h2 >Les actions Oceco pour la soirée</h2>
+        
+        <div style="display: flex; flex-flow: row wrap; align-items: center;" >
+          <label class="switch" ><input type="checkbox" checked id="SwitchSoiréeBar" >
+            <span class="slider round" ></span></label>  
+          <div class='action' id="actionDivBar">
+            <label style='font-size:14px' for="actionDivBarNom"><b>L'action</b></label>
+            <input type="text" placeholder="Nom de l'action bar" id="actionDivBarNom" required><br>
+            <label for="actionDivBarDébuteà"><b>Débute à</b></label>
+            <input type="datetime-local" id="actionDivBarDébuteà" required>
+            <label for="actionDivBarTermineà"><b>et termine à</b></label>
+            <input type="time" id="actionDivBarTermineà" required><br>
+            <label for="actionDivBarMini"><b>Entre</b></label>
+            <input type="number" id="actionDivBarMini" required>
+            <label for="actionDivBarMaxi"><b>et</b></label>
+            <input type="number" id="actionDivBarMaxi" required>
+            volontaires
+            <label for="actionDivBarCredits"><b>gagent</b></label>
+            <input type="number" id="actionDivBarCredits" required> crédits<br/>
+            <label for="actionDivBarDesc"><b>Description de l'action</b></label><br/>
+            <textarea id="actionDivBarDesc" width="100" required></textarea><br/>
+          </div>  
+        </div>
+      </div>
+      */
+        </script>
+      
+ 
+      
+
+      
+      <br>
+
+      <hr>      
+<!-- identifiants  -->    
+            <h2>Identification Oceco</h2>
+      <label for="email"><b>Email</b></label>
+      <input style="width:100%;   padding: 10px; font-size:16px" type="text" placeholder="Ton Email OCECO" name="email" id="email" required=""><br>
+      <label for="psw"><b>Password</b></label>
+      <input style="width:100%;   padding: 10px; font-size:16px" type="password" placeholder="Ton Pass OCECO" name="psw" id="psw" required="">
+
+ 
+      
+
+      <div class="clearfix">
+        <button type="button" onclick="document.getElementById('event').style.display='none'" class="cancelbtn">Annuler</button>
+        <button type="submit" onclick="valider()" class="signupbtn">Créer l'événément et les actions</button>
+      </div>
+    </div>
+  </form>
+</div>    
+    
+  
+
+</body></html>

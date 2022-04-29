@@ -1,0 +1,39 @@
+version: "3.7"
+services:
+  programme:
+    build: .
+    volumes:
+      - ./app:/code/app
+    #ports:
+    #  - 8008:8000
+
+    labels:
+      - traefik.enable=true
+      - traefik.docker.network=frontend
+      - traefik.http.routers.programme.tls.certresolver=myresolver
+      - traefik.http.routers.programme.rule=Host(`programme2.guillaume.laraffinerie.re`)
+      # - traefik.http.routers.test_machine.rule=Host(`maison.nasjo.fr`,`maison2.nasjo.fr`,`maison3.nasjo.fr`)
+      # - traefik.http.routers.test_machine.rule=HostRegexp(`maison.nasjo.fr`,`maison2.nasjo.fr`, `{subdomain:[a-z]+}.nasjo.fr`)
+      #- traefik.http.services.programme.loadbalancer.server.port=8884
+    # ex labels :
+    # labels:
+    #   - "traefik.enable=true"
+    #   - "traefik.docker.network=frontend"
+    #   - "traefik.http.routers.test_machine-http.rule=Host(`${DOMAIN}`)"
+    #   - "traefik.http.routers.test_machine-http.entrypoints=entrypoints-http"
+    #   - "traefik.http.routers.test_machine-http.middlewares=redirect"
+    #   - "traefik.http.middlewares.redirect.redirectscheme.scheme=https"
+    #   - "traefik.http.routers.test_machine-https.rule=Host(`${DOMAIN}`)"
+    #   - "traefik.http.routers.test_machine-https.entrypoints=entrypoints-https"
+    #   - "traefik.http.routers.test_machine-https.tls.certresolver=myresolver"
+    # par default, Traefik prend le premier port exposé comme port http
+    # sinon, utiliser - "traefik.http.services.test_machine.loadbalancer.server.port=8884"
+    # expose:
+      # - 8384
+    networks:
+      - frontend
+    restart: always
+
+networks:
+  frontend:
+    external: true
