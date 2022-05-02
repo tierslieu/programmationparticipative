@@ -8,7 +8,7 @@ from starlette.responses import RedirectResponse
 
 ######################################
 app = FastAPI()
-app.mount("/public", StaticFiles(directory="/code/app/public"), name="public")
+app.mount("/public", StaticFiles(directory="/app/public"), name="public")
 
 ######################################
 @app.get("/")
@@ -39,7 +39,8 @@ async def oceco_batch(id, token, data):
     async with httpx.AsyncClient() as client:
         url = 'https://oce.co.tools/api/batchjson/create'
         headers = {'x-user-id' : id, 'x-access-token' : token, 'Content-Type' : 'application/json'}
-        res = await client.post(url, json=data, headers=headers) 
+        
+        res = await client.post(url, json=data, headers=headers, timeout=30) 
         return res
 
 ######################################

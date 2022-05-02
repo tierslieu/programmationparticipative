@@ -71,7 +71,7 @@ template = new Map([
         active: true,
         slug: "Cuisine",
         moitie: true,
-        minuteEnAvance: 30,
+        minuteEnAvance: 150,
         image: "https://programme.laraffinerie.re/oceco-restauration.jpg",
       },
       {
@@ -155,6 +155,7 @@ template = new Map([
         active: true,
         slug: "Animer",
         minuteEnAvance: 90,
+        creditsNegatif: true
       },
     ],
   ],

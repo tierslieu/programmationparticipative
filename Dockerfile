@@ -1,16 +1,9 @@
-# 
-FROM python:3.9
+# Dockerfile
 
-# 
-WORKDIR /code
+# pull the official docker image
+FROM python:3.9.4-slim
 
-# 
-COPY ./requirements.txt /code/requirements.txt
-
-# 
-RUN pip install --no-cache-dir --upgrade -r /code/requirements.txt
-
-# 
-# COPY ./app /code/app
-
+# install dependencies
+COPY requirements.txt .
+RUN pip install -r requirements.txt
 

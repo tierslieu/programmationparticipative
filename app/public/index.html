@@ -3,6 +3,7 @@
     <script src="p5.sound.min.js"></script>
 <link href="https://cdn.jsdelivr.net/npm/tom-select@2.0.1/dist/css/tom-select.bootstrap5.css" rel="stylesheet">
 <script src="tom-select.complete.min.js"></script>
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <link rel="stylesheet" type="text/css" href="style.css">
     <meta charset="utf-8">
@@ -21,7 +22,7 @@
 
 <div id="event" class="modal">
   <span onclick="resetOcecoPanel()" class="close" title="Close Modal">×</span>
-  <form class="modal-content">
+  <form class="modal-content" id="form" action="" onsubmit="return valider(this);">
     <div class="container" id="container">
       <h1 id="titreFenetre">Créer un événement et ses actions Oceco</h1>
       <hr>
@@ -31,7 +32,9 @@
       
 <!-- Communs aux evenements  -->
       <label for="selectPole"><b>Evénement dans le pôle</b></label>
-      <select id="selectPole" name="selectPole" placeholder="choisir un pole" autocomplete="on" required="">
+      <select id="selectPole" name="selectPole" placeholder="choisir un pole" autocomplete="on" required >
+        <option value="">choisir un pole</option>
+
         <optgroup label="Fréquents">
           <option value="5e4d842d690864aa088b4b01">Café culturel</option>
           <option value="5bdc957640bb4e9e79eefccb">Chantier participatif</option>
@@ -77,12 +80,12 @@
       </select>
       <br>
       <label for="débuteà"><b>Débute à</b></label>
-      <input type="time" id="débuteà" required="">
+      <input type="time" id="débuteà" required >
       <label for="termineà"><b>et termine à</b></label>
-      <input type="time" id="termineà" required=""><br>
+      <input type="time" id="termineà" required><br>
       
       <label for="desc"><b>Description de l'événement</b></label><br>
-      <textarea id="desc" width="100" required=""></textarea><br>
+      <textarea id="desc" width="100" required ></textarea><br>
       
       <hr>
       
@@ -107,42 +110,42 @@
               <span class="slider round" ></span></label>  </label>  
               <div class='action' id="actionDiv${key}${poste.slug}" data-event-type=${key} data-poste=${poste.slug} data-index=${index}>
                 <label style='font-size:14px' for="actionDiv${key}${poste.slug}Nom"><b>L'action</b></label>
-                <input type="text" style='width:70%' placeholder="Nom de l'action ${poste.slug}" id="actionDiv${key}${poste.slug}Nom" data-var="name" required><br>
+                <input type="text" style='width:70%' placeholder="Nom de l'action ${poste.slug}" id="actionDiv${key}${poste.slug}Nom" data-var="name" ><br>
 
 
                 <label for="actionDiv${key}${poste.slug}Moitie" id=actionDivLabel${key}${poste.slug}Moitie>L'action nécessite 2 équipes</label>
-                <input type="checkbox" checked id="actionDiv${key}${poste.slug}Moitie" data-event-type=${key} data-poste=${poste.slug} data-index=${index} required>
+                <input type="checkbox" checked id="actionDiv${key}${poste.slug}Moitie" data-event-type=${key} data-poste=${poste.slug} data-index=${index} >
 <br>
 
 
                 <label for="actionDiv${key}${poste.slug}Débuteà"><b>Débute à</b></label>
-                <input type="time" id="actionDiv${key}${poste.slug}Débuteà" data-var="startHour" required>
+                <input type="time" id="actionDiv${key}${poste.slug}Débuteà" data-var="startHour" >
                 <label for="actionDiv${key}${poste.slug}Termineà"><b>et termine à</b></label>
-                <input type="time" id="actionDiv${key}${poste.slug}Termineà" data-var="endHour" required><br>
+                <input type="time" id="actionDiv${key}${poste.slug}Termineà" data-var="endHour" ><br>
                 <label for="actionDiv${key}${poste.slug}Mini"><b>Entre</b></label>
-                <input type="number" id="actionDiv${key}${poste.slug}Mini" data-var="min" required>
+                <input type="number" id="actionDiv${key}${poste.slug}Mini" data-var="min" >
                 <label for="actionDiv${key}${poste.slug}Maxi"><b>et</b></label>
-                <input type="number" id="actionDiv${key}${poste.slug}Maxi" data-var="max" required>
+                <input type="number" id="actionDiv${key}${poste.slug}Maxi" data-var="max" >
                 volontaires
                 <label for="actionDiv${key}${poste.slug}Credits"><b>gagent</b></label>
-                <input type="number" id="actionDiv${key}${poste.slug}Credits" data-var="credits" required> crédits<br/>
+                <input type="number" id="actionDiv${key}${poste.slug}Credits" data-var="credits" > crédits<br/>
                 <label for="actionDiv${key}${poste.slug}Desc"><b>Description de l'action</b></label><br/>
-                <textarea id="actionDiv${key}${poste.slug}Desc" width="100" data-var="description" required></textarea><br/>
+                <textarea id="actionDiv${key}${poste.slug}Desc" width="100" data-var="description" ></textarea><br/>
               </div>  
               
               <div class='action moitie-2' id="actionDiv${key}${poste.slug}-2" data-event-type=${key} data-poste=${poste.slug} data-index=${index}>
                 <p><label style='font-size:14px'><b>Deuxième équipe ${poste.slug}</b></label></p>
                 <label for="actionDiv${key}${poste.slug}Débuteà-2"><b>Débute à</b></label>
-                <input type="time" id="actionDiv${key}${poste.slug}Débuteà-2" data-var="startHour2" required>
+                <input type="time" id="actionDiv${key}${poste.slug}Débuteà-2" data-var="startHour2" >
                 <label for="actionDiv${key}${poste.slug}Termineà-2"><b>et termine à</b></label>
-                <input type="time" id="actionDiv${key}${poste.slug}Termineà-2" data-var="endHour2" required><br>
+                <input type="time" id="actionDiv${key}${poste.slug}Termineà-2" data-var="endHour2" ><br>
                 <label for="actionDiv${key}${poste.slug}Mini-2"><b>Entre</b></label>
-                <input type="number" id="actionDiv${key}${poste.slug}Mini-2" data-var="min2" required>
+                <input type="number" id="actionDiv${key}${poste.slug}Mini-2" data-var="min2" >
                 <label for="actionDiv${key}${poste.slug}Maxi-2"><b>et</b></label>
-                <input type="number" id="actionDiv${key}${poste.slug}Maxi-2" data-var="max2" required>
+                <input type="number" id="actionDiv${key}${poste.slug}Maxi-2" data-var="max2" >
                 volontaires
                 <label for="actionDiv${key}${poste.slug}Credits-2"><b>gagent</b></label>
-                <input type="number" id="actionDiv${key}${poste.slug}Credits-2" data-var="credits2" required> crédits<br/>
+                <input type="number" id="actionDiv${key}${poste.slug}Credits-2" data-var="credits2" > crédits<br/>
               </div>
             </div> 
             `;
@@ -197,16 +200,16 @@
 <!-- identifiants  -->    
             <h2>Identification Oceco</h2>
       <label for="email"><b>Email</b></label>
-      <input style="width:100%;   padding: 10px; font-size:16px" type="text" placeholder="Ton Email OCECO" name="email" id="email" required=""><br>
+      <input style="width:100%;   padding: 10px; font-size:16px" type="text" placeholder="Ton Email OCECO" name="email" id="email" required><br>
       <label for="psw"><b>Password</b></label>
-      <input style="width:100%;   padding: 10px; font-size:16px" type="password" placeholder="Ton Pass OCECO" name="psw" id="psw" required="">
+      <input style="width:100%;   padding: 10px; font-size:16px" type="password" placeholder="Ton Pass OCECO" name="psw" id="psw" required>
 
  
       
 
       <div class="clearfix">
         <button type="button" onclick="document.getElementById('event').style.display='none'" class="cancelbtn">Annuler</button>
-        <button type="submit" onclick="valider()" class="signupbtn">Créer l'événément et les actions</button>
+        <button type="submit"  class="signupbtn" form="form">Créer l'événément et les actions</button>
       </div>
     </div>
   </form>

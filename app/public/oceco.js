@@ -73,7 +73,10 @@ function eventSwitch() {
 function eventAction() {
   var indexOfAction = this.elt.parentElement.dataset.index;
   var varName = this.elt.dataset.var;
-  eval("events[eventPressedID].actions[indexOfAction]."+varName + " = this.value()");
+  if (this.elt.type == "number")
+    eval("events[eventPressedID].actions[indexOfAction]."+varName + " = int(this.value())");
+  else
+    eval("events[eventPressedID].actions[indexOfAction]."+varName + " = this.value()");
 }
 
 function eventMoitie() {
@@ -134,15 +137,56 @@ function showInputsEvenement(event) {
 }
 
 function valider() {
-  events[eventPressedID].generateJSON();
-  console.log(events[eventPressedID].info);
-  f();
+
+for (const el of document.getElementById('form').querySelectorAll("[required]")) {
+  if (!el.reportValidity()) {
+    return;
+  }
+}
+
+for (const el of document.getElementById('container').querySelectorAll("[required]")) {
+  if (!el.reportValidity()) {
+    return;
+  }
+}
+
+Swal.fire({
+  title: 'Voulez vous créer un événement et des actions ?',
+  showDenyButton: true,
+  showCancelButton: false,
+  confirmButtonText: 'Oui, Créer l\'événement et les actions',
+  denyButtonText: `Non, Annuler`,
+}).then((result) => {
+  /* Read more about isConfirmed, isDenied below */
+  if (result.isConfirmed) {
+    events[eventPressedID].generateJSON();
+    console.log(events[eventPressedID].info);
+    
+    Swal.fire({
+      title: 'Patience, ca crée',
+      html: 'Prend toi une grande inspiration pendant ce temps',// add html attribute if you want or remove
+      allowOutsideClick: false,
+      showCancelButton: false,
+      showConfirmButton: false,
+      onBeforeOpen: () => {
+          Swal.showLoading()
+      },
+    });
+    f();
+  } else if (result.isDenied) {
+    Swal.fire('Rien n\'a été créé', '', 'info')
+  }
+})
+
+return false;
 }
 
 async function f() {
   console.log('AAAAAAAAAAAAAAA');
+
+
   //let response = await fetch("https://cors-anywhere.herokuapp.com/https://oce.co.tools/api/batchjson/create", {
-    let response = await fetch("http://127.0.0.1:8000/oceco", {
+    let response = await fetch("/oceco/", {
     method: "POST",
     headers: {
       'Content-Type': 'application/json'
@@ -150,10 +194,50 @@ async function f() {
     body: JSON.stringify( events[eventPressedID].info ) } )
   .catch(error => {
         console.error('There was an error!', error);
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: 'Il y a eu un problème : ' + error,
+          footer: 'envoie un mail à guillaume@laraffinerie.re'
+        })
+        
     });
 
+    console.log('response : ');
     console.log(response);
-  
+
+    console.log('result : ');
+
     let result = await response.json();
     console.log(result);
+
+    if (result.status == true) {
+      Swal.close();
+      Swal.fire({
+        icon: 'success',
+        title: 'Créé',
+        text: 'L\'action "' + result.json.organizations.projects[0].events[0].name + '" et ' + result.json.organizations.projects[0].events[0].actions.length + ' action(s) ont été créés',
+        confirmButtonText: 'OK',
+      }).then((result) => {
+        /* Read more about isConfirmed, isDenied below */
+        if (result.isConfirmed) {
+          unselectEvent();
+        }
+        })
+      }
+      else {
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'Il y a eu un problème : ' + result.error,
+        footer: 'envoie un mail à <a href=' + encodeURI('mailto:guillaume@laraffinerie.re?subject=erreur avec le programme&body=' + JSON.stringify(result.details[0])) + '> Guillaume le développeur de cet outil</a>'
+      })
+    }
 }
+
+/*
+
+
+
+    Swal.fire('Créé!', '', 'success')
+*/

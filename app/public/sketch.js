@@ -76,6 +76,9 @@ class Evenement {
     // Supprime le nom du mois dans la ligne
     this.date = this.rawDate.replace(/(\**< *\w+\.* *\d{1,2}) ([A-zÀ-ú]{3,9})(.*)/, '$1$3');
 
+    // Supprime les hashtags
+    this.titreEvent = this.titreEvent.replace(/#[^ !@#$%^&*(),.?":{}|<>]*/gi, '');
+
     
        let reggie = /\**(< *\w+\.* *(\d{1,2}) ([A-zÀ-ú]{3,9})(.*) (\d{1,2})h(\d{0,2})[\/ ]*(\d{0,2})[h]*(\d{0,2})[\W]*>>)\**(.+)/;
     let res = reggie.exec(rawLine);
@@ -235,6 +238,7 @@ class Evenement {
     data.organizations.projects[0].events[0].startDate = toDateOceco(this.startDate, this.startHour);
     data.organizations.projects[0].events[0].endDate = toDateOceco(this.startDate, this.endHour);
     data.organizations.projects[0].events[0].actions = [];
+
     for (const action of this.actions) {
       let a = {};
       a.name = action.name;
@@ -264,7 +268,10 @@ class Evenement {
           data.organizations.projects[0].events[0].actions.push(b);
       }
     }
-   
+
+    if (data.organizations.projects[0].events[0].actions.length == 0)
+      delete data.organizations.projects[0].events[0].actions;
+
     info.user = select('#email').value();
     info.passwd = select('#psw').value();
     info.data = data;
@@ -492,7 +499,10 @@ function preload() {
   for (i = 1; i <= 12; i++) selectMonth.option(monthText[i], i);
   selectMonth.changed(mySelectEvent);
   // select le mois prochain, janvier si on est en décembre
-  selectMonth.selected((month() + 1) % 12);
+  if (day() > 18)
+    selectMonth.selected((month() + 1) % 12);
+  else
+    selectMonth.selected(month());
   
     imgBackgroundJaune = loadImage("fond-programme-2.jpg");
   imgBackgroundBleu = loadImage("programme-fond-1.jpg");
