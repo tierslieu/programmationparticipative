@@ -287,7 +287,7 @@ class Chantier extends Evenement {
     this.type = paragraphName;
     this.slug = "Chantier";
     
-    this.poleID = "1";  
+    this.poleID = "5bdc957640bb4e9e79eefccb";  
     
     this.description = "Les chantiers participatifs sont des moments conviviaux où chacun.e peut participer quel que soit son niveau de compétence. C'est un des meilleurs moyens de découvrir le projet de La Raffinerie et de rencontrer des personnes. Les actions du chantiers sont très diverses : bois, métal, jardin, cadre de vie, décoration, cuisine ... Les équipes et les missions sont expliquées et distribuées en début de journée après un petit déjeuner participatif. Chacun.e ramène un petit quelque chose. Le chantier participatif finit à midi avec un repas offert par La Raffinerie"
     
@@ -314,7 +314,7 @@ class Reunion extends Evenement {
     this.calcul2colonnes();
 
     // OCECO
-    this.poleID = "0";
+    this.poleID = "";
     this.description = "Les réunions sont ouvertes à toutes et tous, quelque soit votre connaissance du sujet. Les comptes-rendus des réunions précédentes sont accessibles sur le site https://www.laraffinerie.re dans le pole correspondant"
     
     this.actions = JSON.parse(JSON.stringify(template.get(this.slug)));
@@ -343,7 +343,7 @@ class Soiree extends Evenement {
     super(rawLine);
     this.type = paragraphName;
     this.slug = "Soirée";
-    this.poleID = "3"
+    this.poleID = "5e4d842d690864aa088b4b01"
     this.description = "Evénement culturel à La Raffinerie. Pour en savoir plus sur le programme de la soirée : https://www.raffinerie.re"
     
     this.actions = JSON.parse(JSON.stringify(template.get(this.slug)));
@@ -382,8 +382,9 @@ class Atelier extends Evenement {
     super(rawLine);
     this.type = paragraphName;
     this.slug = "Atelier";
-    this.poleID = "5";
-    
+    this.poleID = "";
+    this.description = "Evénement culturel à La Raffinerie. Pour en savoir plus sur le programme de la soirée : https://www.raffinerie.re"
+
     
     this.actions = JSON.parse(JSON.stringify(template.get(this.slug)));
         
@@ -404,7 +405,8 @@ class Formation extends Evenement {
     this.type = paragraphName;
     this.slug = "Formation";
     
-    //this.poleID = "6";
+    this.poleID = "";
+    this.description = "Les formations sont ouvertes à toutes et tous, et elles peuvent être aussi données celles et ceux qui souhaitent partager un savoir-faire, savoir-être, une connaissance etc."
 
     
     this.actions = JSON.parse(JSON.stringify(template.get(this.slug)));
