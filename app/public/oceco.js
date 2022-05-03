@@ -213,10 +213,14 @@ async function f() {
 
     if (result.status == true) {
       Swal.close();
+      let name = result.json.organizations.projects[0].events[0].name;
+      let numActions = 0;
+      if (result.json.organizations.projects[0].events[0].hasOwnProperty("actions"))
+        numActions = result.json.organizations.projects[0].events[0].actions.length;
       Swal.fire({
         icon: 'success',
         title: 'Créé',
-        text: 'L\'action "' + result.json.organizations.projects[0].events[0].name + '" et ' + result.json.organizations.projects[0].events[0].actions.length + ' action(s) ont été créés',
+        text: 'L\'action "' + name + '" et ' + numActions + ' action(s) ont été créés',
         confirmButtonText: 'OK',
       }).then((result) => {
         /* Read more about isConfirmed, isDenied below */
