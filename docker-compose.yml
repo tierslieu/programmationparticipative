@@ -15,7 +15,7 @@ services:
       - traefik.docker.network=frontend
       - traefik.http.routers.programme.tls.certresolver=myresolver
       - traefik.http.routers.programme.tls=true
-      - traefik.http.routers.programme.rule=Host(`programme.laraffinerie.re`)
+      - traefik.http.routers.programme.rule=Host(`programme.laraffinerie.re`,`programme.guillaume.laraffinerie.re`)
       # - traefik.http.routers.test_machine.rule=Host(`maison.nasjo.fr`,`maison2.nasjo.fr`,`maison3.nasjo.fr`)
       # - traefik.http.routers.test_machine.rule=HostRegexp(`maison.nasjo.fr`,`maison2.nasjo.fr`, `{subdomain:[a-z]+}.nasjo.fr`)
       #- traefik.http.services.programme.loadbalancer.server.port=8884
