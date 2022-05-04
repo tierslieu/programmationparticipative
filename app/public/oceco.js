@@ -5,6 +5,10 @@
 
 function creerInputOceco() {
 
+  select("#débuteà").changed(eventEvent);
+  select("#termineà").changed(eventEvent);
+  select("#desc").changed(eventEvent);
+
   for (const [key, value] of template) {
     for (var poste of value) {
       //console.log("#Switch__"+key+'__'+poste.slug)
@@ -30,22 +34,15 @@ function creerInputOceco() {
 // EVENTS
 /********************************/
 
+function eventEvent() {
+  var varName = this.elt.dataset.var;
+  eval("events[eventPressedID]."+varName + " = this.value()");
+}
+
+
 function selectPoleEvent() {
   events[eventPressedID].poleID = this.getValue();
 }
-
-function inputStartDateEvent() {
-  events[eventPressedID].startDate = this.value();
-}
-
-function inputEndHourEvent() {
-  events[eventPressedID].endHour = this.value();
-}
-
-function inputDescEvent() {
-  events[eventPressedID].description = this.value();
-}
-
 
 
 
@@ -184,7 +181,6 @@ return false;
 async function f() {
   console.log('AAAAAAAAAAAAAAA');
 
-
   //let response = await fetch("https://cors-anywhere.herokuapp.com/https://oce.co.tools/api/batchjson/create", {
     let response = await fetch("/oceco/", {
     method: "POST",
@@ -194,6 +190,7 @@ async function f() {
     body: JSON.stringify( events[eventPressedID].info ) } )
   .catch(error => {
         console.error('There was an error!', error);
+        Swal.close();
         Swal.fire({
           icon: 'error',
           title: 'Oops...',
@@ -208,33 +205,46 @@ async function f() {
 
     console.log('result : ');
 
-    let result = await response.json();
-    console.log(result);
+ 
+    if (response.ok == true){
+      let result = await response.json();
+      console.log(result);
 
-    if (result.status == true) {
-      Swal.close();
-      let name = result.json.organizations.projects[0].events[0].name;
-      let numActions = 0;
-      if (result.json.organizations.projects[0].events[0].hasOwnProperty("actions"))
-        numActions = result.json.organizations.projects[0].events[0].actions.length;
-      Swal.fire({
-        icon: 'success',
-        title: 'Créé',
-        text: 'L\'action "' + name + '" et ' + numActions + ' action(s) ont été créés',
-        confirmButtonText: 'OK',
-      }).then((result) => {
-        /* Read more about isConfirmed, isDenied below */
-        if (result.isConfirmed) {
-          unselectEvent();
+      if (result.status == true) {
+        Swal.close();
+        let name = result.json.organizations.projects[0].events[0].name;
+        let numActions = 0;
+        if (result.json.organizations.projects[0].events[0].hasOwnProperty("actions"))
+          numActions = result.json.organizations.projects[0].events[0].actions.length;
+        Swal.fire({
+          icon: 'success',
+          title: 'Créé',
+          text: 'L\'action "' + name + '" et ' + numActions + ' action(s) ont été créés',
+          confirmButtonText: 'OK',
+        }).then((result) => {
+          /* Read more about isConfirmed, isDenied below */
+          if (result.isConfirmed) {
+            unselectEvent();
+          }
+          })
         }
+      // Error dans le resultat de la réponse
+      else {
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: 'Il y a eu un problème avec le résultat : ' + result.error,
+          footer: 'envoie un mail à <a href=' + encodeURI('mailto:guillaume@laraffinerie.re?subject=erreur avec le programme&body=' + JSON.stringify(result.details[0])) + '> Guillaume le développeur de cet outil</a>'
         })
       }
-      else {
+    }
+    // Erreur avec le fetch
+    else {
       Swal.fire({
         icon: 'error',
         title: 'Oops...',
-        text: 'Il y a eu un problème : ' + result.error,
-        footer: 'envoie un mail à <a href=' + encodeURI('mailto:guillaume@laraffinerie.re?subject=erreur avec le programme&body=' + JSON.stringify(result.details[0])) + '> Guillaume le développeur de cet outil</a>'
+        text: 'Il y a eu un problème avec la requête: ' + response.status,
+        footer: 'envoie un mail à <a href=' + encodeURI('mailto:guillaume@laraffinerie.re?subject=erreur avec le programme&body=' + JSON.stringify(response)) + '> Guillaume le développeur de cet outil</a>'
       })
     }
 }

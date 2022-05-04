@@ -163,7 +163,9 @@ class Evenement {
     this.endHour = "00:00"; // Default
     this.startHour = "00:00"; // default
   }  
-    
+  
+
+
   this.actions = [];
 
   
@@ -176,7 +178,6 @@ class Evenement {
     select('#actions'+this.slug).show();
     // modal
     showInputsEvenement(this);
-    
     for (const [index, poste] of template.get(this.slug).entries()) {
       select("#Switch__"+this.slug+'__'+poste.slug).checked(this.actions[index].active);
       if (this.actions[index].active == false)
@@ -189,14 +190,7 @@ class Evenement {
       select('#actionDiv'+ this.slug + poste.slug + 'Maxi').value(this.actions[index].max);      
       select('#actionDiv'+ this.slug + poste.slug + 'Credits').value(this.actions[index].credits);
       select('#actionDiv'+ this.slug + poste.slug + 'Desc').value(this.actions[index].description);
-      
-      // deuxieme moitie data
-      select('#actionDiv'+ this.slug + poste.slug + 'Débuteà-2').value(this.actions[index].startHour2);
-      select('#actionDiv'+ this.slug + poste.slug + 'Termineà-2').value(this.actions[index].endHour2);
-      select('#actionDiv'+ this.slug + poste.slug + 'Mini-2').value(this.actions[index].min2);
-      select('#actionDiv'+ this.slug + poste.slug + 'Maxi-2').value(this.actions[index].max2);   
-      select('#actionDiv'+ this.slug + poste.slug + 'Credits-2').value(this.actions[index].credits2);
-      
+
       // Show or Hide "2 équipes" checkbox
       if (! this.actions[index].hasOwnProperty("moitie")) {
           select('#actionDivLabel'+ this.slug + poste.slug + 'Moitie').hide();
@@ -212,6 +206,13 @@ class Evenement {
         }
         else
           select('#actionDiv'+ this.slug + poste.slug + '-2').hide();
+
+        // deuxieme moitie data
+        select('#actionDiv'+ this.slug + poste.slug + 'Débuteà-2').value(this.actions[index].startHour2);
+        select('#actionDiv'+ this.slug + poste.slug + 'Termineà-2').value(this.actions[index].endHour2);
+        select('#actionDiv'+ this.slug + poste.slug + 'Mini-2').value(this.actions[index].min2);
+        select('#actionDiv'+ this.slug + poste.slug + 'Maxi-2').value(this.actions[index].max2);   
+        select('#actionDiv'+ this.slug + poste.slug + 'Credits-2').value(this.actions[index].credits2);
       }
 
 
@@ -355,7 +356,6 @@ class Soiree extends Evenement {
 
       action.credits = calculTimeDiff(this.startDate, action.startHour, action.endHour);
       action.startHour2 = calculHalfTime(this.startDate, action.startHour, action.endHour);
-      console.log("start2 " + action.startHour2)
       action.endHour2 = action.endHour;
 
       action.credits2 = calculTimeDiff(this.startDate, action.startHour2, action.endHour2);
