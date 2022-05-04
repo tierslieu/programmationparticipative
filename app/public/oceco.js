@@ -22,7 +22,11 @@ function creerInputOceco() {
       select("#actionDiv"+key+poste.slug+"Desc").changed(eventAction);
       
       select("#actionDiv"+key+poste.slug+"Moitie").changed(eventMoitie);
-
+      select("#actionDiv"+key+poste.slug+"Débuteà-2").changed(eventAction);
+      select("#actionDiv"+key+poste.slug+"Termineà-2").changed(eventAction);
+      select("#actionDiv"+key+poste.slug+"Mini-2").changed(eventAction);
+      select("#actionDiv"+key+poste.slug+"Maxi-2").changed(eventAction);
+      select("#actionDiv"+key+poste.slug+"Credits-2").changed(eventAction);
     }
   }
   
