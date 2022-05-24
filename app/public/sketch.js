@@ -76,8 +76,13 @@ class Evenement {
     // Supprime le nom du mois dans la ligne
     this.date = this.rawDate.replace(/(\**< *\w+\.* *\d{1,2}) ([A-zÀ-ú]{3,9})(.*)/, '$1$3');
 
-    // Supprime les hashtags
-    this.titreEvent = this.titreEvent.replace(/#[^ !@#$%^&*(),.?":{}|<>]*/gi, '');
+    // supprime les hashtags
+    let regHash = /(.*)(^|\s)(#[A-zÀ-ú\d-]+)/;
+    let resHash = regHash.exec(this.titreEvent);
+    if (resHash != null && resHash[1] != undefined)
+      [ , this.titreEvent, this.bienveillant ] = resHash;
+    else
+      this.bienveillant = "";
 
     
        let reggie = /\**(< *\w+\.* *(\d{1,2}) ([A-zÀ-ú]{3,9})(.*) (\d{1,2})h(\d{0,2})[\/ ]*(\d{0,2})[h]*(\d{0,2})[\W]*>>)\**(.+)/;
@@ -617,6 +622,7 @@ function setup() {
     {
       if (events[i].type == titresArray[divID] && events[i].moisOK)
         {
+          pg.fill(0, 0, 0);
           // memorise le depart en y
           if (yStart == 0)
             yStart = ypos;
@@ -639,6 +645,9 @@ function setup() {
           let w = pg.textWidth(events[i].rawDate);
           pg.textFont(fontTypewriter);
           save_ypos = ypos; // Pour le mouseOver 
+          // change la couleur si pas de bienveillant
+          if (events[i].bienveillant == "")
+            pg.fill(255, 0, 0);
           if (events[i].nbLines !== undefined)
           {
             pg.textWrap(WORD);
