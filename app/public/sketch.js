@@ -77,7 +77,7 @@ class Evenement {
     this.date = this.rawDate.replace(/(\**< *\w+\.* *\d{1,2}) ([A-zÀ-ú]{3,9})(.*)/, '$1$3');
 
     // supprime les hashtags
-    let regHash = /(.*)(^|\s)(#[A-zÀ-ú\d-]+)/;
+    let regHash = /(.*)(^|\s)(@[A-zÀ-ú\d-]+)/;
     let resHash = regHash.exec(this.titreEvent);
     if (resHash != null && resHash[1] != undefined)
       [ , this.titreEvent, this.bienveillant ] = resHash;
