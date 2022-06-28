@@ -73,15 +73,19 @@ class Evenement {
     // Suprimme les ** 
     this.rawDate = this.rawDate.replace(/\*\*/g, '');
     
-    // Supprime le nom du mois dans la ligne
-    this.date = this.rawDate.replace(/(\**< *\w+\.* *\d{1,2}) ([A-zÀ-ú]{3,9})(.*)/, '$1$3');
-
     // Cherche et supprime le #interne
     if (this.titreEvent.search(/#interne/) != -1)
       this.interne = true;
     else 
       this.interne = false;
     this.titreEvent = this.titreEvent.replace(/#interne/, '');
+
+    // Cherche et supprime le #interne
+    if (this.titreEvent.search(/#force/) != -1)
+      this.force = true;
+    else 
+      this.force = false;
+    this.titreEvent = this.titreEvent.replace(/#force/, '');
 
     // supprime les @ noms
     let regHash = /(.*)(^|\s)(@[A-zÀ-ú\d-]+)/;
@@ -91,8 +95,13 @@ class Evenement {
     else
       this.bienveillant = "";
 
+    // Supprime le nom du mois dans la ligne (sauf si #force)
+    if (!this.force)
+      this.date = this.rawDate.replace(/(\**< *\w+\.* *\d{1,2}) ([A-zÀ-ú]{3,9})(.*)/, '$1$3');     
+    else 
+      this.date = this.rawDate;
     
-       let reggie = /\**(< *\w+\.* *(\d{1,2}) ([A-zÀ-ú]{3,9})(.*) (\d{1,2})h(\d{0,2})[\/ ]*(\d{0,2})[h]*(\d{0,2})[\W]*>>)\**(.+)/;
+    let reggie = /\**(< *\w+\.* *(\d{1,2}) ([A-zÀ-ú]{3,9})(.*) (\d{1,2})h(\d{0,2})[\/ ]*(\d{0,2})[h]*(\d{0,2})[\W]*>>)\**(.+)/;
     let res = reggie.exec(rawLine);
     this.eventOK = false;
     if (res != null && res[1] != undefined) {
@@ -558,7 +567,7 @@ function setup() {
   nbLinesParColonnes = 0;
   for (i = 0; i < events.length; i++)
     {
-      if (events[i].type == "Réunions" && events[i].moisOK && !events[i].interne)
+      if (events[i].type == "Réunions" && (events[i].moisOK || events[i].force) && !events[i].interne )
         nbLinesParColonnes += events[i].nbLines;
     }
   nbLinesParColonnes = ceil(nbLinesParColonnes / 2);
@@ -627,7 +636,7 @@ function setup() {
 
     for (i = 0; i < events.length; i++) 
     {
-      if (events[i].type == titresArray[divID] && events[i].moisOK && !events[i].interne)
+      if (events[i].type == titresArray[divID] && (events[i].moisOK || events[i].force) && !events[i].interne)
         {
           pg.fill(0, 0, 0);
           // memorise le depart en y
