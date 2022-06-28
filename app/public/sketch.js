@@ -76,7 +76,14 @@ class Evenement {
     // Supprime le nom du mois dans la ligne
     this.date = this.rawDate.replace(/(\**< *\w+\.* *\d{1,2}) ([A-zÀ-ú]{3,9})(.*)/, '$1$3');
 
-    // supprime les hashtags
+    // Cherche et supprime le #interne
+    if (this.titreEvent.search(/#interne/) != -1)
+      this.interne = true;
+    else 
+      this.interne = false;
+    this.titreEvent = this.titreEvent.replace(/#interne/, '');
+
+    // supprime les @ noms
     let regHash = /(.*)(^|\s)(@[A-zÀ-ú\d-]+)/;
     let resHash = regHash.exec(this.titreEvent);
     if (resHash != null && resHash[1] != undefined)
@@ -551,7 +558,7 @@ function setup() {
   nbLinesParColonnes = 0;
   for (i = 0; i < events.length; i++)
     {
-      if (events[i].type == "Réunions")
+      if (events[i].type == "Réunions" && events[i].moisOK && !events[i].interne)
         nbLinesParColonnes += events[i].nbLines;
     }
   nbLinesParColonnes = ceil(nbLinesParColonnes / 2);
@@ -620,7 +627,7 @@ function setup() {
 
     for (i = 0; i < events.length; i++) 
     {
-      if (events[i].type == titresArray[divID] && events[i].moisOK)
+      if (events[i].type == titresArray[divID] && events[i].moisOK && !events[i].interne)
         {
           pg.fill(0, 0, 0);
           // memorise le depart en y
