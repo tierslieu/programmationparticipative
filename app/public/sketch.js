@@ -34,7 +34,7 @@ let monthText = [
   "Mai",
   "Juin",
   "Juillet",
-  "Août",
+  "Aout",
   "Septembre",
   "Octobre",
   "Novembre",
