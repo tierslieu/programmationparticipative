@@ -72,7 +72,7 @@ template = new Map([
         slug: "Cuisine",
         moitie: true,
         minuteEnAvance: 150,
-        image: "https://programme.laraffinerie.re/oceco-restauration.jpg",
+        image: "https://programme.laraffinerie.re/public/oceco-restauration.jpg",
       },
       {
         name: "Aide à l'accueil",
@@ -83,7 +83,7 @@ template = new Map([
         slug: "Accueil",
         moitie: false,
         minuteEnAvance: 30,
-        image: "https://programme.laraffinerie.re/oceco-accueil.jpg",
+        image: "https://programme.laraffinerie.re/public/oceco-accueil.jpg",
       },
       {
         name: "Volontaire polyvalent",
@@ -94,7 +94,7 @@ template = new Map([
         slug: "Polyvalent",
         moitie: true,
         minuteEnAvance: 30,
-        image: "https://programme.laraffinerie.re/oceco-volant.jpg",
+        image: "https://programme.laraffinerie.re/public/oceco-volant.jpg",
       },
       {
         name: "Volontaire à la technique",
