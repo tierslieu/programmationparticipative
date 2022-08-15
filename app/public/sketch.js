@@ -255,7 +255,7 @@ class Evenement {
     data.organizations.projects[0].events[0].name = this.titreEvent;
     data.organizations.projects[0].events[0].type = "meeting";
     data.organizations.projects[0].events[0].description = this.description;
-    data.organizations.projects[0].events[0].imageUrl = "https://programme.laraffinerie.re/logoRaffinerie2.jpg";
+    data.organizations.projects[0].events[0].imageUrl = "https://programme.laraffinerie.re/public/logoRaffinerie2.jpg";
 
     data.organizations.projects[0].events[0].startDate = toDateOceco(this.startDate, this.startHour);
     data.organizations.projects[0].events[0].endDate = toDateOceco(this.startDate, this.endHour);
