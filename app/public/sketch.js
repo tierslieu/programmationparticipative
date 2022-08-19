@@ -119,21 +119,10 @@ class Evenement {
         ,
       ] = res;
 
-      
-       if (  
-           monthText[mois]
-            .toLowerCase()
-            .normalize("NFD")
-            .replace(/[\u0300-\u036f]/g, "")
-            .match(
-              this.mois
-                .toLowerCase()
-                .normalize("NFD")
-                .replace(/[\u0300-\u036f]/g, "")
-            )
-           )
+      this.moisDecimal = monthText.findIndex(element => element.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").match( this.mois.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "")));
+      if ( mois == moisDecimal )
            this.moisOK = true;
-           else this.moisOK = false;
+      else this.moisOK = false;
       
       if (this.jour.length == 1) this.jour = "0" + this.jour;
       if (this.heureDebut.length == 1) this.heureDebut = "0" + this.heureDebut;
@@ -174,7 +163,7 @@ class Evenement {
       console.log( "???");
 */
     
-  this.startDate = annee+'-'+((mois<10)?'0':'')+mois+'-'+this.jour+'T'+this.heureDebut+':'+this.minuteDebut;
+  this.startDate = annee+'-'+((this.moisDecimal<10)?'0':'')+this.moisDecimal+'-'+this.jour+'T'+this.heureDebut+':'+this.minuteDebut;
   this.endHour = this.heureFin + ':' + this.minuteFin;  
   this.startHour = this.heureDebut + ':' + this.minuteDebut; 
     
