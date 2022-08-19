@@ -119,8 +119,9 @@ class Evenement {
         ,
       ] = res;
 
+      console.warn(this.rawLine)
       this.moisDecimal = monthText.findIndex(element => element.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").match( this.mois.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "")));
-      if ( mois == moisDecimal )
+      if ( mois == this.moisDecimal )
            this.moisOK = true;
       else this.moisOK = false;
       
@@ -523,7 +524,6 @@ function preload() {
 
 function setup() {
 
-  
   textFont(fontTypewriter);
 
   if (mois == undefined) mySelectEvent();
