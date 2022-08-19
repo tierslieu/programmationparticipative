@@ -119,7 +119,6 @@ class Evenement {
         ,
       ] = res;
 
-      console.warn(this.rawLine)
       this.moisDecimal = monthText.findIndex(element => element.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").match( this.mois.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "")));
       if ( mois == this.moisDecimal )
            this.moisOK = true;
