@@ -69,6 +69,11 @@ class Evenement {
     let resDate = regDate.exec(rawLine);
     if (resDate != null && resDate[1] != undefined)
       [ , this.rawDate, this.titreEvent ] = resDate;
+    else {
+      this.error = true;
+      this.rawDate = "erreur";
+      this.titreEvent = "sur cette ligne dans le fichier texte"
+    }
     
     // Suprimme les ** 
     this.rawDate = this.rawDate.replace(/\*\*/g, '');
@@ -101,7 +106,7 @@ class Evenement {
     else 
       this.date = this.rawDate;
     
-    let reggie = /\**(< *\w+\.* *(\d{1,2}) ([A-zÀ-ú]{3,9})(.*) (\d{1,2})h(\d{0,2})[\/ ]*(\d{0,2})[h]*(\d{0,2})[\W]*>>)\**(.+)/;
+    let reggie = /\**(< *\w+\.* *(\d{1,2})[er]* ([A-zÀ-ú]{3,9})([^0-9]*) (\d{1,2})h(\d{0,2})[\/ ]*(\d{0,2})[h]*(\d{0,2})[\W]*>>)\**(.+)/;
     let res = reggie.exec(rawLine);
     this.eventOK = false;
     if (res != null && res[1] != undefined) {
