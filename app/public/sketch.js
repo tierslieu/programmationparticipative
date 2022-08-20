@@ -123,10 +123,6 @@ class Evenement {
         this.minuteFin,
         ,
       ] = res;
-    if (this.eventOK == false) {
-      this.rawDate = "erreur";
-      this.titreEvent = "sur cette ligne dans le fichier texte"
-    }
 
       this.moisDecimal = monthText.findIndex(element => element.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").match( this.mois.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "")));
       if ( mois == this.moisDecimal )
@@ -149,6 +145,10 @@ class Evenement {
 
     }
     
+    if (this.eventOK == false) {
+      this.titreEvent = "erreur de format de date sur cette ligne dans le fichier texte"
+    }
+
       textFont(fontLove);
       textSize(taillePolice);
       this.dateWidth = textWidth(this.date);
