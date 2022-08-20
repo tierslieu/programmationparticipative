@@ -123,6 +123,10 @@ class Evenement {
         this.minuteFin,
         ,
       ] = res;
+    else {
+      this.rawDate = "erreur";
+      this.titreEvent = "sur cette ligne dans le fichier texte"
+    }
 
       this.moisDecimal = monthText.findIndex(element => element.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").match( this.mois.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "")));
       if ( mois == this.moisDecimal )
@@ -655,7 +659,7 @@ function setup() {
           pg.textFont(fontTypewriter);
           save_ypos = ypos; // Pour le mouseOver 
           // change la couleur si pas de bienveillant
-          if (events[i].bienveillant == "")
+          if (events[i].bienveillant == "" || events[i].eventOK == false)
             pg.fill(255, 0, 0);
           if (events[i].nbLines !== undefined)
           {
