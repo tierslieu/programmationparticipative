@@ -123,7 +123,7 @@ class Evenement {
         this.minuteFin,
         ,
       ] = res;
-    if (!this.eventOK) {
+    if (this.eventOK == false) {
       this.rawDate = "erreur";
       this.titreEvent = "sur cette ligne dans le fichier texte"
     }
