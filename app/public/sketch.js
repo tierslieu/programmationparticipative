@@ -145,7 +145,7 @@ class Evenement {
 
     }
     
-    if (this.eventOK == false) {
+    if (this.eventOK == false && !this.force) {
       this.titreEvent = "erreur de format de date sur cette ligne dans le fichier texte"
     }
 
@@ -659,7 +659,7 @@ function setup() {
           pg.textFont(fontTypewriter);
           save_ypos = ypos; // Pour le mouseOver 
           // change la couleur si pas de bienveillant
-          if (events[i].bienveillant == "" || events[i].eventOK == false)
+          if ((events[i].bienveillant == "" || events[i].eventOK == false) && events[i].force == false )
             pg.fill(255, 0, 0);
           if (events[i].nbLines !== undefined)
           {
