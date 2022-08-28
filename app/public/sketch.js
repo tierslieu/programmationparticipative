@@ -9,6 +9,7 @@ let ypos = 210;
 let divArray = [];
 let soustitresArray = [];
 let titresArray = [];
+let nbLinesArray = [];
 let programmeArray = [];
 let divID = 0;
 let titre;
@@ -45,7 +46,7 @@ let events = [];
 
 let scalar = 0.8; // Different for each font
 
-let nbLinesParColonnes;
+//let nbLinesParColonnes;
 
 let pg;
 let taillePolice = 27;
@@ -299,6 +300,12 @@ class Evenement {
     this.info = info;
   }
 
+  calcul2colonnes()
+  {
+    this.nbLines = 1 + Math.floor(this.titreWidth / this.maxWidth);
+    //console.log(this.nblines);
+  }
+
 }
 
 class Chantier extends Evenement {
@@ -306,7 +313,9 @@ class Chantier extends Evenement {
     super(rawLine);
     this.type = paragraphName;
     this.slug = "Chantier";
-    
+    this.maxWidth = ((1500 - 80) / 2) - this.dateWidth;
+    this.calcul2colonnes();
+
     this.poleID = "5bdc957640bb4e9e79eefccb";  
     
     this.description = "Les chantiers participatifs sont des moments conviviaux où chacun.e peut participer quel que soit son niveau de compétence. C'est un des meilleurs moyens de découvrir le projet de La Raffinerie et de rencontrer des personnes. Les actions du chantiers sont très diverses : bois, métal, jardin, cadre de vie, décoration, cuisine ... Les équipes et les missions sont expliquées et distribuées en début de journée après un petit déjeuner participatif. Chacun.e ramène un petit quelque chose. Le chantier participatif finit à midi avec un repas offert par La Raffinerie"
@@ -349,11 +358,7 @@ class Reunion extends Evenement {
 }
 
   
-  calcul2colonnes()
-  {
-    this.nbLines = 1 + Math.floor(this.titreWidth / this.maxWidth);
-    //console.log(this.nblines);
-  }
+
   
 
 }
@@ -530,6 +535,8 @@ function preload() {
   selectMonth.hide();
 }
 
+//---------------------------------------------------------------//
+//---------------------------------------------------------------//
 function setup() {
 
   textFont(fontTypewriter);
@@ -544,11 +551,14 @@ function setup() {
   
   for (i = 0; i < lines.length; i++) {
     if (lines[i].startsWith("## ")) {
+      // pour les sections à couper en 2
+      if (divID >= 0)
+        nbLinesArray[divID] = ceil(nbLinesArray[divID] / 2);
       divID++;
-
+      nbLinesArray[divID] = 0;
       titresArray[divID] = lines[i].slice(3);
-            divArray.push(titresArray[divID]);
-
+      divArray.push(titresArray[divID]);
+      nbLinesArray[divID] = 0;
     }
 
     if (lines[i].startsWith("###### ")) {
@@ -556,18 +566,22 @@ function setup() {
     }
 
     if (divID >= 0 && !lines[i].startsWith("#") && lines[i].length > 0) {
-      events.push(factory.creerEvenement(lines[i], titresArray[divID]));   
-      
+      // e est la longueur du tableau
+      e = events.push(factory.creerEvenement(lines[i], titresArray[divID]));   
+      //console.log( events[e-1] );
+      if (events[e-1].nbLines !== undefined  && (events[e-1].moisOK || events[e-1].force) && !events[e-1].interne )
+        nbLinesArray[divID] += events[e-1].nbLines;
     }
   }
   
-  nbLinesParColonnes = 0;
-  for (i = 0; i < events.length; i++)
-    {
-      if (events[i].type == "Réunions" && (events[i].moisOK || events[i].force) && !events[i].interne )
-        nbLinesParColonnes += events[i].nbLines;
-    }
-  nbLinesParColonnes = ceil(nbLinesParColonnes / 2);
+  //nbLinesParColonnes = 0;
+  
+  // for (i = 0; i < events.length; i++)
+  //   {
+  //     if (events[i].type == "Réunions" && (events[i].moisOK || events[i].force) && !events[i].interne )
+  //       nbLinesParColonnes += events[i].nbLines;
+  //   }
+  // nbLinesParColonnes = ceil(nbLinesParColonnes / 2);
 
   button = createButton('Télécharger l\'image du programme');
   button.position(100, 0);
@@ -640,7 +654,7 @@ function setup() {
           if (yStart == 0)
             yStart = ypos;
           
-          if (nbL < nbLinesParColonnes || events[i].nbLines === undefined)
+          if (nbL < nbLinesArray[divID] || events[i].nbLines === undefined)
               x = 20;
           else
             {
