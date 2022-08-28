@@ -302,8 +302,29 @@ class Evenement {
 
   calcul2colonnes()
   {
-    this.nbLines = 1 + Math.floor(this.titreWidth / this.maxWidth);
-    //console.log(this.nblines);
+    ///this.nbLines = 1 + Math.floor(this.titreWidth / this.maxWidth);
+    this.nbLines = 1;
+    textFont(fontTypewriter);
+    const words = this.titreEvent.split(' ');
+
+    let largeur = 0;
+    //console.log("maxW: "+ this.maxWidth - 30);
+    for (const mot of words) {
+      //console.log(mot + ", largeur=" + textWidth(mot));
+      largeur += textWidth(mot);
+      // Lors du print il y a 20 + 8 pixels décalés à droite
+      if (largeur > (this.maxWidth - 28)) {
+        //console.log("largeur: " + largeur);
+        this.nbLines += 1;
+        // On repart de la largeur du mot qui a dépassé
+        largeur = textWidth(mot);
+      }
+      else 
+        largeur += textWidth(" ");
+    } 
+
+
+    console.log("nblines: " + this.nbLines);
   }
 
 }
