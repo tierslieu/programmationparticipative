@@ -429,8 +429,8 @@ class Atelier extends Evenement {
     this.slug = "Atelier";
     this.poleID = "";
     this.description = "Evénement culturel à La Raffinerie. Pour en savoir plus sur le programme de la soirée : https://www.raffinerie.re"
-    this.maxWidth = ((1500 - 80) / 2) - this.dateWidth;
-    this.calcul2colonnes();
+    //this.maxWidth = ((1500 - 80) / 2) - this.dateWidth;
+    //this.calcul2colonnes();
     
     this.actions = JSON.parse(JSON.stringify(template.get(this.slug)));
         
