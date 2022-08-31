@@ -308,13 +308,12 @@ class Evenement {
     const words = this.titreEvent.split(' ');
 
     let largeur = 0;
-    console.log("maxW: "+ this.maxWidth - 30);
+    //console.log("maxW: "+ this.maxWidth);
     for (const mot of words) {
       console.log(mot + ", largeur=" + textWidth(mot));
       largeur += textWidth(mot);
-      // Lors du print il y a 20 + 8 pixels décalés à droite
-      if (largeur > (this.maxWidth - 28)) {
-        console.log("largeur: " + largeur);
+      if (largeur > (this.maxWidth )) {
+        //console.log("largeur: " + largeur + ", maxW: " + this.maxWidth);
         this.nbLines += 1;
         // On repart de la largeur du mot qui a dépassé
         largeur = textWidth(mot);
@@ -324,7 +323,7 @@ class Evenement {
     } 
 
 
-    console.log("nblines: " + this.nbLines);
+    //console.log("nblines: " + this.nbLines);
   }
 
 }
@@ -347,7 +346,9 @@ class Chantier extends Evenement {
     for (const action of this.actions) {
       action.startDate = this.startDate; // uniquement pour avoir le jour
       action.startHour = addToHour(this.startDate, this.startHour, -action.minuteEnAvance);
-      action.endHour = addToHour(this.startDate, this.endHour, +0);  
+      if (action.minuteFinEnAvance != 0) console.log("avant:"+this.endHour);
+      action.endHour = addToHour(this.startDate, this.endHour, -action.minuteFinEnAvance);
+      if (action.minuteFinEnAvance != 0) console.log(this.endHour);  
       action.credits = calculTimeDiff(this.startDate, action.startHour, action.endHour);
     }
   }
@@ -372,7 +373,7 @@ class Reunion extends Evenement {
     for (const action of this.actions) {
       action.startDate = this.startDate; // uniquement pour avoir le jour
       action.startHour = addToHour(this.startDate, this.startHour, -action.minuteEnAvance);
-      action.endHour = addToHour(this.startDate, this.endHour, +0);  
+      action.endHour = addToHour(this.startDate, this.endHour, -action.minuteFinEnAvance);  
       action.credits = calculTimeDiff(this.startDate, action.startHour, action.endHour);
     }
   
@@ -397,7 +398,7 @@ class Soiree extends Evenement {
     for (const action of this.actions) {
       action.startDate = this.startDate; // uniquement pour avoir le jour
       action.startHour = addToHour(this.startDate, this.startHour, -action.minuteEnAvance);
-      action.endHour = addToHour(this.startDate, this.endHour, +0);  
+      action.endHour = addToHour(this.startDate, this.endHour, -action.minuteFinEnAvance);  
 
       action.credits = calculTimeDiff(this.startDate, action.startHour, action.endHour);
       action.startHour2 = calculHalfTime(this.startDate, action.startHour, action.endHour);
@@ -437,7 +438,7 @@ class Atelier extends Evenement {
     for (const action of this.actions) {
       action.startDate = this.startDate; // uniquement pour avoir le jour
       action.startHour = addToHour(this.startDate, this.startHour, -action.minuteEnAvance);
-      action.endHour = addToHour(this.startDate, this.endHour, +0);  
+      action.endHour = addToHour(this.startDate, this.endHour, -action.minuteFinEnAvance);  
       action.credits = calculTimeDiff(this.startDate, action.startHour, action.endHour);
     }
   }
@@ -460,7 +461,7 @@ class Formation extends Evenement {
     for (const action of this.actions) {
       action.startDate = this.startDate; // uniquement pour avoir le jour
       action.startHour = addToHour(this.startDate, this.startHour, -action.minuteEnAvance);
-      action.endHour = addToHour(this.startDate, this.endHour, +0);  
+      action.endHour = addToHour(this.startDate, this.endHour, -action.minuteFinEnAvance);  
       action.credits = calculTimeDiff(this.startDate, action.startHour, action.endHour);
     }
   }
@@ -510,7 +511,7 @@ function calculTimeDiff(day, startHour, endHour) {
 
 function addToDate(date, minutes) {
   var MS_PER_MINUTE = 60000;
-//console.log(Date.parse(date));
+console.log("date: " + Date.parse(date) + ", minutes: " + minutes);
  //   console.log(date);
 
   var myStartDate = new Date(Date.parse(date) + minutes * MS_PER_MINUTE);
