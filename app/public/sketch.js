@@ -310,7 +310,7 @@ class Evenement {
     let largeur = 0;
     //console.log("maxW: "+ this.maxWidth);
     for (const mot of words) {
-      console.log(mot + ", largeur=" + textWidth(mot));
+      //console.log(mot + ", largeur=" + textWidth(mot));
       largeur += textWidth(mot);
       if (largeur > (this.maxWidth )) {
         //console.log("largeur: " + largeur + ", maxW: " + this.maxWidth);
@@ -346,10 +346,11 @@ class Chantier extends Evenement {
     for (const action of this.actions) {
       action.startDate = this.startDate; // uniquement pour avoir le jour
       action.startHour = addToHour(this.startDate, this.startHour, -action.minuteEnAvance);
-      if (action.minuteFinEnAvance != 0) console.log("avant:"+this.endHour);
       action.endHour = addToHour(this.startDate, this.endHour, -action.minuteFinEnAvance);
-      if (action.minuteFinEnAvance != 0) console.log(this.endHour);  
       action.credits = calculTimeDiff(this.startDate, action.startHour, action.endHour);
+      if (action.creditsNegatif) 
+        action.credits = action.credits * -1;
+       
     }
   }
   
@@ -375,6 +376,8 @@ class Reunion extends Evenement {
       action.startHour = addToHour(this.startDate, this.startHour, -action.minuteEnAvance);
       action.endHour = addToHour(this.startDate, this.endHour, -action.minuteFinEnAvance);  
       action.credits = calculTimeDiff(this.startDate, action.startHour, action.endHour);
+      if (action.creditsNegatif) 
+        action.credits = action.credits * -1;
     }
   
 }
@@ -440,6 +443,8 @@ class Atelier extends Evenement {
       action.startHour = addToHour(this.startDate, this.startHour, -action.minuteEnAvance);
       action.endHour = addToHour(this.startDate, this.endHour, -action.minuteFinEnAvance);  
       action.credits = calculTimeDiff(this.startDate, action.startHour, action.endHour);
+      if (action.creditsNegatif) 
+        action.credits = action.credits * -1;
     }
   }
   
@@ -463,6 +468,8 @@ class Formation extends Evenement {
       action.startHour = addToHour(this.startDate, this.startHour, -action.minuteEnAvance);
       action.endHour = addToHour(this.startDate, this.endHour, -action.minuteFinEnAvance);  
       action.credits = calculTimeDiff(this.startDate, action.startHour, action.endHour);
+      if (action.creditsNegatif) 
+        action.credits = action.credits * -1;
     }
   }
   
@@ -511,7 +518,7 @@ function calculTimeDiff(day, startHour, endHour) {
 
 function addToDate(date, minutes) {
   var MS_PER_MINUTE = 60000;
-console.log("date: " + Date.parse(date) + ", minutes: " + minutes);
+//console.log("date: " + Date.parse(date) + ", minutes: " + minutes);
  //   console.log(date);
 
   var myStartDate = new Date(Date.parse(date) + minutes * MS_PER_MINUTE);
