@@ -244,6 +244,8 @@ class Evenement {
 
     let data = {};
     data.organizations = { _id: "5e40fec1690864bc598b4874" };
+    if (this.interne)
+      data.organizations = { _id: "5f604389690864ba028b483c" };
     data.organizations.projects = [];
     data.organizations.projects[0] = {};
     data.organizations.projects[0]._id = this.poleID;
@@ -667,11 +669,20 @@ function setup() {
       events[eventPressedID].poleID = value;
 
     },
+    optgroupField: 'groupe',
+    optgroups: [
+      {value: 'Fréquents', label: 'Fréquents'},
+      {value: 'Jardin', label: 'Jardin'},
+      {value: 'Culture', label: 'Culture'},
+      {value: 'Alimentation', label: 'Alimentation'},
+      {value: 'Micro-Recyclerie', label: 'Micro-Recyclerie'},
+      {value: 'Communs', label: 'Communs'},
+      {value: 'CA', label: 'CA'},
+      {value: 'Raffineurs', label: 'Raffineurs'},
+
+    ],
     create: false,
-    sortField: {
-      field: "text",
-      direction: "asc"
-    },
+
     render: {
       option: function (data, escape) {
         return '<div class="d-flex"><span>' + escape(data.text) + '</span></div>';
@@ -687,6 +698,7 @@ function setup() {
       },
     }
   });
+
 }
 
 
@@ -866,7 +878,7 @@ function dessineTout(graf, isIntern) {
     eventPressedID = id;
 
     //showOcecoPanel(eventPressedID);
-    if (id >= 0 && events[id].eventOK && events[id].interne == false)
+    if (id >= 0 && events[id].eventOK)
       events[id].showOcecoInputs();
   }
 
