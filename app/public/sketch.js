@@ -1,6 +1,8 @@
 let myFont;
 let imgBackgroundJaune;
 let imgBackgroundBleu;
+let imgQuestion;
+let linkQuestion;
 let lines;
 let couleur1 = [240, 142, 108];
 let rose = [226, 92, 146];
@@ -585,6 +587,11 @@ function preload() {
   imgBackgroundBleu = loadImage("programme-fond-1.jpg");
   imgBackgroundInterneBleu = loadImage("programme fond 2022 bleu.jpg")
   selectMonth.hide();
+
+  linkQuestion = createA("https://documentation.laraffinerie.re/index.php/Le_programme_mensuel", '<img src=question-mark.png></img>');
+  linkQuestion.position(10,10);
+  //imgQuestion = loadImage("question-mark.png").parent(linkQuestion);
+
 }
 
 //---------------------------------------------------------------//
@@ -816,6 +823,7 @@ function dessineTout(graf, isIntern) {
   function draw() {
 
     background(255);
+    //image(imgQuestion, 10,10);
 
     let entourage = 2;
     noStroke();
