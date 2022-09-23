@@ -94,12 +94,18 @@ class Evenement {
     this.titreEvent = this.titreEvent.replace(/#force/, '');
 
     // supprime les @ noms
-    let regHash = /(.*)(^|\s)(@[A-zÀ-ú\d-]+)/;
+    let regHash = /(@[A-zÀ-ú\d-.]+)/;
+    if (this.titreEvent.search(regHash) != -1)
+    this.bienveillant = true;
+    else
+    this.bienveillant = false;
+    this.titreEvent = this.titreEvent.replace(regHash, '');
+/*     let regHash = /(.*)(^|\s)(@[A-zÀ-ú\d-]+)/;
     let resHash = regHash.exec(this.titreEvent);
     if (resHash != null && resHash[1] != undefined)
       [, this.titreEvent, this.bienveillant] = resHash;
     else
-      this.bienveillant = "";
+      this.bienveillant = ""; */
 
     // Supprime le nom du mois dans la ligne (sauf si #force)
     if (!this.force)
@@ -770,7 +776,7 @@ function dessineTout(graf, isIntern) {
         graf.textFont(fontTypewriter);
         save_ypos = ypos; // Pour le mouseOver 
         // change la couleur si pas de bienveillant
-        if ((events[i].bienveillant == "" || events[i].eventOK == false) && events[i].force == false)
+        if ((events[i].bienveillant == false || events[i].eventOK == false) && events[i].force == false)
           graf.fill(255, 0, 0);
         if (events[i].nbLines !== undefined) {
           graf.textWrap(WORD);
