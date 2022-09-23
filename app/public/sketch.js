@@ -637,6 +637,7 @@ function setup() {
   buttonModifier = createButton('Modifier le texte du programme');
   buttonModifier.position(100 + 1500 / 4 + 20, 0);
   buttonModifier.size(1500 / 4 - 20, 80);
+  buttonModifier.style('background', 'linear-gradient(to right, rgb(164,186,0), rgb(57,182,184))');
   buttonModifier.mousePressed(modifier);
 
   let bleu = color(57,182,184);
