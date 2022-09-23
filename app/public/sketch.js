@@ -4,7 +4,7 @@ let imgBackgroundBleu;
 let lines;
 let couleur1 = [240, 142, 108];
 let rose = [226, 92, 146];
-let violet = [174, 100, 165];
+let violet = [167, 139, 188];
 let ypos = 210;
 let divArray = [];
 let soustitresArray = [];
@@ -721,6 +721,7 @@ function dessineTout(graf, isIntern) {
   graf.textFont(fontLove);
   if (mois % 2 == 0) graf.fill(rose);
   else graf.fill(couleur1);
+  if (isIntern) graf.fill(violet);
   graf.textSize(64);
   graf.textLeading(64);
   graf.textAlign(CENTER);
