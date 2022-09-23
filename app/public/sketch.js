@@ -759,7 +759,7 @@ function dessineTout(graf, isIntern) {
         if (yStart == 0)
           yStart = ypos;
 
-        if (nbL < nbLinesArray[divID] || events[i].nbLines === undefined)
+        if (nbL < nbLinesArray[divID] || events[i].nbLines === undefined || isIntern)
           x = 20;
         else {
           x = 1500 / 2 + 10;
@@ -778,7 +778,7 @@ function dessineTout(graf, isIntern) {
         // change la couleur si pas de bienveillant
         if ((events[i].bienveillant == false || events[i].eventOK == false) && events[i].force == false)
           graf.fill(255, 0, 0);
-        if (events[i].nbLines !== undefined) {
+        if (events[i].nbLines !== undefined && !isIntern) {
           graf.textWrap(WORD);
           graf.textLeading(taillePolice);
           graf.text(events[i].titreEvent, x + events[i].dateWidth + 8, ypos, events[i].maxWidth);
