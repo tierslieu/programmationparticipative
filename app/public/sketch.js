@@ -635,21 +635,26 @@ function setup() {
   //   }
   // nbLinesParColonnes = ceil(nbLinesParColonnes / 2);
 
+  let jaune = color(241,227,0);
+  let vert = color(164,186,0);
+  let bleu = color(57,182,184);
+  let col = (mois % 2 == 0)?jaune:vert;
+
   button = createButton('Télécharger l\'image du programme');
   button.position(100, 0);
-  button.size(1500 / 4 - 20, 80);
+  button.size(1500 / 3 - 20, 80);
+  button.style('background-color', col);
   button.mousePressed(sauvegarder);
 
   buttonModifier = createButton('Modifier le texte du programme');
-  buttonModifier.position(100 + 1500 / 4 + 20, 0);
-  buttonModifier.size(1500 / 4 - 20, 80);
-  buttonModifier.style('background', 'linear-gradient(to right, rgb(164,186,0), rgb(57,182,184))');
+  buttonModifier.position(100 + 1500 / 3 + 20, 0);
+  buttonModifier.size(1500 / 3 - 20 - 20 +50, 80);
+  buttonModifier.style('background', 'linear-gradient(to right,'+col+' 30%, rgb(57,182,184) 70%)');
   buttonModifier.mousePressed(modifier);
 
-  let bleu = color(57,182,184);
   buttonIntern = createButton('Télécharger le programme interne');
-  buttonIntern.position(900, 0);
-  buttonIntern.size(1500 / 4 - 20, 80);
+  buttonIntern.position(100 + 2 * (1500 / 3) + 20 + 50 , 0);
+  buttonIntern.size(1500 / 3 - 20, 80);
   buttonIntern.style('background-color', bleu);
   buttonIntern.mousePressed(sauvegarderIntern);
 
