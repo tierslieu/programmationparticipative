@@ -193,6 +193,7 @@ textarea {
 /* Set a style for all buttons */
 button {
   background-color: rgb(164,186,0); 
+  border-radius: 10px;
   color: white;
   padding: 14px 20px;
   margin: 8px 0;
