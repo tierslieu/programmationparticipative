@@ -254,7 +254,7 @@ async function f() {
         Swal.fire({
           icon: 'error',
           title: 'Oops...',
-          text: 'Il y a eu un problème : ' + error,
+          text: 'Il y a eu un problème, est ce que tu es sûr.e d\'avoir les droits pour créer dans ce pole oceco ? Erreur : ' + error,
           footer: 'envoie un mail à guillaume@laraffinerie.re'
         })
         
