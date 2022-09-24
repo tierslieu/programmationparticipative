@@ -589,7 +589,7 @@ function preload() {
   selectMonth.hide();
 
   linkQuestion = createA("https://documentation.laraffinerie.re/index.php/Le_programme_mensuel", '<img src=question-mark.png></img>');
-  linkQuestion.position(10,10);
+  linkQuestion.position(2,20);
   //imgQuestion = loadImage("question-mark.png").parent(linkQuestion);
 
 }
