@@ -13,7 +13,7 @@ app.mount("/public", StaticFiles(directory="/app/public"), name="public")
 ######################################
 @app.get("/")
 async def read_index():
-    return RedirectResponse(url="/public/index.html")   
+    return RedirectResponse(url="/public/index.html?v=3")   
 
 ###################
 ## authentification
