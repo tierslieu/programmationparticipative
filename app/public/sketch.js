@@ -651,20 +651,20 @@ function setup() {
 
 
   let buttonSize = 300;
-  button = createButton('<i class="fa fa-download"></i>  &nbsp; Programme public');
+  button = createButton('<i class="fa fa-download fa-lg"></i>  &nbsp; Programme public');
   //button.position(100, 0);
   button.position(100 + 1500 / 4 - buttonSize / 2, 0);
   button.size(buttonSize, 80);
   button.style('background-color', col);
   button.mousePressed(sauvegarder);
 
-  buttonModifier = createButton('<i class="fa fa-pencil-square-o"></i> &nbsp;  Modifier le contenu');
+  buttonModifier = createButton('<i class="fa fa-pencil-square-o fa-lg"></i> &nbsp;  Modifier le contenu');
   buttonModifier.position(100 + 1500 /2  - buttonSize/2, 0);
   buttonModifier.size(buttonSize +50, 80);
   buttonModifier.style('background', 'linear-gradient(to right,'+col+' 30%, rgb(57,182,184) 70%)');
   buttonModifier.mousePressed(modifier);
 
-  buttonIntern = createButton('<i class="fa fa-download"></i> &nbsp; Programme interne');
+  buttonIntern = createButton('<i class="fa fa-download fa-lg"></i> &nbsp; Programme interne');
   //buttonIntern.position(100 + 2 * (1500 / 3) + espace + 50 , 0);
   buttonIntern.position(100 + 1500 /2 + 50 + 1500 / 4 - buttonSize / 2, 0);
   buttonIntern.size(buttonSize, 80);
