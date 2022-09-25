@@ -598,6 +598,7 @@ function preload() {
 //---------------------------------------------------------------//
 function setup() {
 
+
   textFont(fontTypewriter);
 
   if (mois == undefined) mySelectEvent();
@@ -825,8 +826,8 @@ function dessineTout(graf, isIntern) {
 }
 
   function draw() {
-
     background(255);
+
     //image(imgQuestion, 10,10);
 
     let entourage = 2;

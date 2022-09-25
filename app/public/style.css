@@ -1,6 +1,6 @@
 html, body {
   margin: 0;
-  padding:  font-family: "typewriter";
+  font-family: "typewriter";
   background-color: white;
 }
 canvas {
@@ -204,14 +204,14 @@ button {
     font-family: "typewriter";
   font-size:20px;
   text-shadow:
-  0.05em 0 black,
-  0 0.05em black,
-  -0.05em 0 black,
-  0 -0.05em black,
-  -0.05em -0.05em black,
-  -0.05em 0.05em black,
-  0.05em -0.05em black,
-  0.05em 0.05em black;
+  0.05em 0 grey,
+  0 0.05em grey,
+  -0.05em 0 grey,
+  0 -0.05em grey,
+  -0.05em -0.05em grey,
+  -0.05em 0.05em grey,
+  0.05em -0.05em grey,
+  0.05em 0.05em grey;
   height:80px;
 }
 
