@@ -88,7 +88,7 @@ class Evenement {
       this.interne = false;
     this.titreEvent = this.titreEvent.replace(/#interne/, '');
 
-    // Cherche et supprime le #interne
+    // Cherche et supprime le #force
     if (this.titreEvent.search(/#force/) != -1)
       this.force = true;
     else
@@ -101,7 +101,7 @@ class Evenement {
     this.bienveillant = true;
     else
     this.bienveillant = false;
-    this.titreEvent = this.titreEvent.replace(regHash, '');
+    this.titreEvent = this.titreEvent.replaceAll(regHash, '');
 /*     let regHash = /(.*)(^|\s)(@[A-zÀ-ú\d-]+)/;
     let resHash = regHash.exec(this.titreEvent);
     if (resHash != null && resHash[1] != undefined)
