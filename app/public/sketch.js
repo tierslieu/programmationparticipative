@@ -96,7 +96,7 @@ class Evenement {
     this.titreEvent = this.titreEvent.replace(/#force/, '');
 
     // supprime les @ noms
-    let regHash = /(@[A-zÀ-ú\d-.]+)/;
+    let regHash = /(@[A-zÀ-ú\d-.]+)/g;
     if (this.titreEvent.search(regHash) != -1)
     this.bienveillant = true;
     else
