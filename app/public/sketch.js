@@ -102,6 +102,10 @@ class Evenement {
     else
     this.bienveillant = false;
     this.titreEvent = this.titreEvent.replaceAll(regHash, '');
+
+    // reformatte les * (sont écrites /*)
+    this.titreEvent = this.titreEvent.replaceAll(/\\\*/g, '*');
+
 /*     let regHash = /(.*)(^|\s)(@[A-zÀ-ú\d-]+)/;
     let resHash = regHash.exec(this.titreEvent);
     if (resHash != null && resHash[1] != undefined)
@@ -622,7 +626,7 @@ function setup() {
     }
 
     if (lines[i].startsWith("###### ")) {
-      soustitresArray[divID] = lines[i].slice(7);
+      soustitresArray[divID] = lines[i].slice(7).replaceAll(/\\\*/g, '*');  // remplace les \* par *
     }
 
     if (divID >= 0 && !lines[i].startsWith("#") && lines[i].length > 0) {
@@ -746,82 +750,90 @@ function dessineTout(graf, isIntern) {
   graf.textAlign(LEFT);
 
   for (divID = 0; divID < divArray.length; divID++) {
-    graf.textFont(fontLove);
-    graf.fill(0, 0, 0);
-    graf.textSize(50);
-    ypos += graf.textAscent();
-    graf.text(". " + titresArray[divID] + " .", 20, ypos);
-    graf.line(20, ypos + 10, graf.width - 40, ypos + 10);
-    ypos += 20;
-
-    graf.textFont(fontTypewriter);
-    graf.fill(0, 0, 0);
-    graf.textSize(24);
-    graf.textLeading(24);
-    ypos += graf.textAscent();
-    graf.text(soustitresArray[divID], 20, ypos, graf.width - 20);
-    ypos += graf.textAscent();
-    // si ca fait plus d'une ligne (todo : marche que pour 2 lignes)
-    if (graf.textWidth(soustitresArray[divID]) > graf.width - 20)
-      ypos += graf.textAscent() * 2;
-    ypos += 20;
-
-    let nbL = 0;
-    let yStart = 0;
-    let yEnd = 0;
-    graf.textLeading(25);
-
+    found = false;
     for (i = 0; i < events.length; i++) {
-      if (events[i].type == titresArray[divID] && (events[i].moisOK || events[i].force) && events[i].interne == isIntern) {
-        graf.fill(0, 0, 0);
-        // memorise le depart en y
-        if (yStart == 0)
-          yStart = ypos;
-
-        if (nbL < nbLinesArray[divID] || events[i].nbLines === undefined || isIntern)
-          x = 20;
-        else {
-          x = 1500 / 2 + 10;
-          // memorise la fin en y de la premiere colonne, et redémarre la seconde colonne à ystart
-          if (yEnd == 0) {
-            yEnd = ypos;
-            ypos = yStart;
-          }
-        }
-        graf.textSize(taillePolice);
-        graf.textFont(fontLove);
-        graf.text(events[i].date, x, ypos);
-        let w = graf.textWidth(events[i].rawDate);
-        graf.textFont(fontTypewriter);
-        save_ypos = ypos; // Pour le mouseOver 
-        // change la couleur si pas de bienveillant
-        if ((events[i].bienveillant == false || events[i].eventOK == false) && events[i].force == false)
-          graf.fill(255, 0, 0);
-        if (events[i].nbLines !== undefined && !isIntern) {
-          graf.textWrap(WORD);
-          graf.textLeading(taillePolice);
-          graf.text(events[i].titreEvent, x + events[i].dateWidth + 8, ypos, events[i].maxWidth);
-          ypos += events[i].nbLines * taillePolice + 5;
-          nbL += events[i].nbLines;
-          events[i].rect = { x: x, y: save_ypos - taillePolice, w: 1500 / 2 - 20, h: events[i].nbLines * taillePolice + 5 };
-        }
-        else {
-          graf.text(events[i].titreEvent, x + events[i].dateWidth + 8, ypos);
-          ypos += taillePolice + 5;
-          nbL++;
-          events[i].rect = { x: x, y: save_ypos - taillePolice, w: 1460, h: taillePolice + 5 };
-        }
-        if (isIntern)
-          events[i].rect.x += 1600;
-      }
+      if (events[i].type == titresArray[divID] && (events[i].moisOK || events[i].force) && events[i].interne == isIntern)
+        found = true;
+      if (found)
+        break;
     }
-    ypos = max(yEnd, ypos);
-    ypos += 20;
-    //divArray[divID].position(20, ypos);
-    //ypos += divArray[divID].height + 20;
+    if (found) { 
+      graf.textFont(fontLove);
+      graf.fill(0, 0, 0);
+      graf.textSize(50);
+      ypos += graf.textAscent();
+      graf.text(". " + titresArray[divID] + " .", 20, ypos);
+      graf.line(20, ypos + 10, graf.width - 40, ypos + 10);
+      ypos += 20;
 
-    //console.log(divArray[divID].height);
+      graf.textFont(fontTypewriter);
+      graf.fill(0, 0, 0);
+      graf.textSize(24);
+      graf.textLeading(24);
+      ypos += graf.textAscent();
+      graf.text(soustitresArray[divID], 20, ypos, graf.width - 20);
+      ypos += graf.textAscent();
+      // si ca fait plus d'une ligne (todo : marche que pour 2 lignes)
+      if (graf.textWidth(soustitresArray[divID]) > graf.width - 20)
+        ypos += graf.textAscent() * 2;
+      ypos += 20;
 
+      let nbL = 0;
+      let yStart = 0;
+      let yEnd = 0;
+      graf.textLeading(25);
+
+      for (i = 0; i < events.length; i++) {
+        if (events[i].type == titresArray[divID] && (events[i].moisOK || events[i].force) && events[i].interne == isIntern) {
+          graf.fill(0, 0, 0);
+          // memorise le depart en y
+          if (yStart == 0)
+            yStart = ypos;
+
+          if (nbL < nbLinesArray[divID] || events[i].nbLines === undefined || isIntern)
+            x = 20;
+          else {
+            x = 1500 / 2 + 10;
+            // memorise la fin en y de la premiere colonne, et redémarre la seconde colonne à ystart
+            if (yEnd == 0) {
+              yEnd = ypos;
+              ypos = yStart;
+            }
+          }
+          graf.textSize(taillePolice);
+          graf.textFont(fontLove);
+          graf.text(events[i].date, x, ypos);
+          let w = graf.textWidth(events[i].rawDate);
+          graf.textFont(fontTypewriter);
+          save_ypos = ypos; // Pour le mouseOver 
+          // change la couleur si pas de bienveillant
+          if ((events[i].bienveillant == false || events[i].eventOK == false) && events[i].force == false)
+            graf.fill(255, 0, 0);
+          if (events[i].nbLines !== undefined && !isIntern) {
+            graf.textWrap(WORD);
+            graf.textLeading(taillePolice);
+            graf.text(events[i].titreEvent, x + events[i].dateWidth + 8, ypos, events[i].maxWidth);
+            ypos += events[i].nbLines * taillePolice + 5;
+            nbL += events[i].nbLines;
+            events[i].rect = { x: x, y: save_ypos - taillePolice, w: 1500 / 2 - 20, h: events[i].nbLines * taillePolice + 5 };
+          }
+          else {
+            graf.text(events[i].titreEvent, x + events[i].dateWidth + 8, ypos);
+            ypos += taillePolice + 5;
+            nbL++;
+            events[i].rect = { x: x, y: save_ypos - taillePolice, w: 1460, h: taillePolice + 5 };
+          }
+          if (isIntern)
+            events[i].rect.x += 1600;
+        }
+      }
+      ypos = max(yEnd, ypos);
+      ypos += 20;
+      //divArray[divID].position(20, ypos);
+      //ypos += divArray[divID].height + 20;
+
+      //console.log(divArray[divID].height);
+    }
   }
 }
 
