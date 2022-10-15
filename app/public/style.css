@@ -17,6 +17,27 @@ canvas {
   src: url("A Love of Thunder.ttf");
 }
 
+
+@font-face {
+  font-family: heyoctober;
+  src: url("HeyOctober.ttf");
+}
+
+nav { margin: 0 0 15px;}
+
+.navbar-brand { 
+  font-family: "heyoctober" !important; 
+  font-size: xx-large;
+}
+
+.navbar-dark .navbar-nav .nav-link {
+  font-family: 'typewriter' !important;
+}
+.dropdown-item {
+  font-family: 'typewriter' !important;
+}
+
+
 h2 {
   color: rgb(226, 92, 146);
 }

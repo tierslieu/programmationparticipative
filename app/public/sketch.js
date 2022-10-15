@@ -593,7 +593,7 @@ function preload() {
   selectMonth.hide();
 
   linkQuestion = createA("https://documentation.laraffinerie.re/index.php/Le_programme_mensuel", '<img src=question-mark.png></img>');
-  linkQuestion.position(20,20);
+  linkQuestion.position(20,100);
   //imgQuestion = loadImage("question-mark.png").parent(linkQuestion);
 
 }
@@ -657,20 +657,20 @@ function setup() {
   let buttonSize = 300;
   button = createButton('<i class="fa fa-download fa-lg"></i>  &nbsp; Programme public');
   //button.position(100, 0);
-  button.position(100 + 1500 / 4 - buttonSize / 2, 0);
+  button.position(100 + 1500 / 4 - buttonSize / 2, 80);
   button.size(buttonSize, 80);
   button.style('background-color', col);
   button.mousePressed(sauvegarder);
 
   buttonModifier = createButton('<i class="fa fa-pencil-square-o fa-lg"></i> &nbsp;  Modifier le contenu');
-  buttonModifier.position(100 + 1500 /2  - buttonSize/2, 0);
+  buttonModifier.position(100 + 1500 /2  - buttonSize/2, 80);
   buttonModifier.size(buttonSize +50, 80);
   buttonModifier.style('background', 'linear-gradient(to right,'+col+' 30%, rgb(57,182,184) 70%)');
   buttonModifier.mousePressed(modifier);
 
   buttonIntern = createButton('<i class="fa fa-download fa-lg"></i> &nbsp; Programme interne');
   //buttonIntern.position(100 + 2 * (1500 / 3) + espace + 50 , 0);
-  buttonIntern.position(100 + 1500 /2 + 50 + 1500 / 4 - buttonSize / 2, 0);
+  buttonIntern.position(100 + 1500 /2 + 50 + 1500 / 4 - buttonSize / 2, 80);
   buttonIntern.size(buttonSize, 80);
   buttonIntern.style('background-color', bleu);
   buttonIntern.mousePressed(sauvegarderIntern);
