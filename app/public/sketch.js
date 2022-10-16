@@ -868,10 +868,10 @@ function dessineTout(graf, isIntern) {
     overDetected = false;
     cursor('default');
     for (i = 0; i < events.length; i++) {
-      if (events[i].rect !== undefined && overText(events[i].rect.x / 2 + 100, events[i].rect.y / 2 + 100, events[i].rect.w / 2, events[i].rect.h / 2)) {
+      if (events[i].rect !== undefined && overText(events[i].rect.x / 2 + 100, events[i].rect.y / 2 + 10, events[i].rect.w / 2, events[i].rect.h / 2)) {
         noStroke();
         fill(23, 41, 131, 60);
-        rect(events[i].rect.x / 2 + 100, events[i].rect.y / 2 + 100, events[i].rect.w / 2, events[i].rect.h / 2);
+        rect(events[i].rect.x / 2 + 100, events[i].rect.y / 2 + 10, events[i].rect.w / 2, events[i].rect.h / 2);
         eventOverID = i;
         overDetected = true;
         cursor('pointer');
