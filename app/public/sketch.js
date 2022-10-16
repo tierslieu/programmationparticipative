@@ -884,7 +884,7 @@ function dessineTout(graf, isIntern) {
       stroke(23, 41, 131);
       strokeWeight(2);
       noFill();
-      rect(events[eventPressedID].rect.x / 2 + 100, events[eventPressedID].rect.y / 2 + 100, events[eventPressedID].rect.w / 2, events[eventPressedID].rect.h / 2);
+      rect(events[eventPressedID].rect.x / 2 + 100, events[eventPressedID].rect.y / 2 + 10, events[eventPressedID].rect.w / 2, events[eventPressedID].rect.h / 2);
 
       //  PanneauOceco();
     }
