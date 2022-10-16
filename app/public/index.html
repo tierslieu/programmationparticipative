@@ -82,8 +82,19 @@
   <script src="sketch.js?v=35"></script>
   <script src="oceco.js"></script>
 
+  <div class="boutons">
+    <a href="https://documentation.laraffinerie.re/index.php/Le_programme_mensuel"><img src=question-mark.png style="position: relative; left: -180px;"></a>
 
-
+    <button id="buttonSave1" class="actionButton" type="button" onclick="sauvegarder()" style=" width:300px">
+      <i class="fa fa-download fa-lg"></i>  &nbsp; Programme public!
+    </button>
+    <button id="buttonEdit" class="actionButton" type="button" onclick="modifier()" style=" width:350px">
+      <i class="fa fa-pencil-square-o fa-lg"></i> &nbsp;  Modifier le contenu!
+    </button>
+    <button id="buttonSave2" class="actionButton" type="button" onclick="sauvegarderIntern()" style="width:300px">
+      <i class="fa fa-download fa-lg"></i> &nbsp; Programme interne!
+    </button>
+  </div>
 
 
 <div id="event" class="modal">

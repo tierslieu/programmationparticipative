@@ -211,6 +211,14 @@ textarea {
 
 }
 
+.boutons {
+  width: 1700px;
+  height: 100px;
+  display: flex;  
+  justify-content: center;  
+  align-items: center;  
+}
+
 /* Set a style for all buttons */
 button.actionButton {
   background-color: rgb(164,186,0); 
@@ -218,10 +226,10 @@ button.actionButton {
   border-radius: 10px;
   color: white;
   padding: 14px 20px;
-  margin: 8px 0;
+  margin: 8px 50px;
   border: none;
   cursor: pointer;
-  width: 100%;
+  width: 350px;
     font-family: "typewriter";
   font-size:20px;
   text-shadow:
