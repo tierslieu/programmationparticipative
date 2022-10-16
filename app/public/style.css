@@ -212,7 +212,7 @@ textarea {
 }
 
 /* Set a style for all buttons */
-button {
+button.actionButton {
   background-color: rgb(164,186,0); 
   opacity: 1;
   border-radius: 10px;
@@ -243,14 +243,25 @@ button:hover {
 
 /*xtra styles for the cancel button */
 .cancelbtn {
-  padding: 14px 20px;
   background-color: rgb(240,142,108);
+}
+.signupbtn {
+  background-color: rgb(164,186,0); 
 }
 
 /* Float cancel and signup buttons and add an equal width */
 .cancelbtn, .signupbtn {
   float: left;
   width: 50%;
+  border-radius: 10px;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  cursor: pointer;
+  font-family: "typewriter";
+  font-size:20px;
+  height:80px;
 }
 
 /* Add padding to container elements */
