@@ -51,7 +51,7 @@ let scalar = 0.8; // Different for each font
 //let nbLinesParColonnes;
 
 let pg;
-let taillePolice = 27;
+let taillePolice = 25;
 
 let eventOverID = -1;
 let eventPressedID = -1;
@@ -318,6 +318,7 @@ class Evenement {
     ///this.nbLines = 1 + Math.floor(this.titreWidth / this.maxWidth);
     this.nbLines = 1;
     textFont(fontTypewriter);
+    textSize(taillePolice);
     const words = this.titreEvent.split(' ');
 
     let largeur = 0;
