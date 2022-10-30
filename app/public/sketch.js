@@ -593,8 +593,8 @@ function preload() {
   imgBackgroundInterneBleu = loadImage("programme fond 2022 bleu.jpg")
   selectMonth.hide();
 
-  linkQuestion = createA("https://documentation.laraffinerie.re/index.php/Le_programme_mensuel", '<img src=question-mark.png></img>');
-  linkQuestion.position(20,100);
+  //linkQuestion = createA("https://documentation.laraffinerie.re/index.php/Le_programme_mensuel", '<img src=question-mark.png></img>');
+  //linkQuestion.position(20,100);
   //imgQuestion = loadImage("question-mark.png").parent(linkQuestion);
 
 }
@@ -653,28 +653,37 @@ function setup() {
   let bleu = color(57,182,184);
   let col = (mois % 2 == 0)?jaune:vert;
   let espace = 100;
-
-
   let buttonSize = 300;
-  button = createButton('<i class="fa fa-download fa-lg"></i>  &nbsp; Programme public');
-  //button.position(100, 0);
-  button.position(100 + 1500 / 4 - buttonSize / 2, 80);
-  button.size(buttonSize, 80);
-  button.style('background-color', col);
-  button.mousePressed(sauvegarder);
 
-  buttonModifier = createButton('<i class="fa fa-pencil-square-o fa-lg"></i> &nbsp;  Modifier le contenu');
-  buttonModifier.position(100 + 1500 /2  - buttonSize/2, 80);
-  buttonModifier.size(buttonSize +50, 80);
-  buttonModifier.style('background', 'linear-gradient(to right,'+col+' 30%, rgb(57,182,184) 70%)');
-  buttonModifier.mousePressed(modifier);
+  //select('#buttonSave1').size(buttonSize, 80);
+  select('#buttonSave1').style('background-color', col);
+  //select('#buttonSave1').position(100 + 1500 / 4 - buttonSize / 2, 0, 'relative');
+  select('#buttonEdit').style('background', 'linear-gradient(to right,'+col+' 30%, rgb(57,182,184) 70%)');
+  select('#buttonSave2').style('background-color', bleu);
 
-  buttonIntern = createButton('<i class="fa fa-download fa-lg"></i> &nbsp; Programme interne');
-  //buttonIntern.position(100 + 2 * (1500 / 3) + espace + 50 , 0);
-  buttonIntern.position(100 + 1500 /2 + 50 + 1500 / 4 - buttonSize / 2, 80);
-  buttonIntern.size(buttonSize, 80);
-  buttonIntern.style('background-color', bleu);
-  buttonIntern.mousePressed(sauvegarderIntern);
+
+  // button = createButton('<i class="fa fa-download fa-lg"></i>  &nbsp; Programme public');
+  // button.addClass('actionButton');
+  // //button.position(100, 0);
+  // button.position(100 + 1500 / 4 - buttonSize / 2, 80);
+  // button.size(buttonSize, 80);
+  // button.style('background-color', col);
+  // button.mousePressed(sauvegarder);
+
+  // buttonModifier = createButton('<i class="fa fa-pencil-square-o fa-lg"></i> &nbsp;  Modifier le contenu');
+  // buttonModifier.addClass('actionButton');
+  // buttonModifier.position(100 + 1500 /2  - buttonSize/2, 80);
+  // buttonModifier.size(buttonSize +50, 80);
+  // buttonModifier.style('background', 'linear-gradient(to right,'+col+' 30%, rgb(57,182,184) 70%)');
+  // buttonModifier.mousePressed(modifier);
+
+  // buttonIntern = createButton('<i class="fa fa-download fa-lg"></i> &nbsp; Programme interne');
+  // buttonIntern.addClass('actionButton');
+  // //buttonIntern.position(100 + 2 * (1500 / 3) + espace + 50 , 0);
+  // buttonIntern.position(100 + 1500 /2 + 50 + 1500 / 4 - buttonSize / 2, 80);
+  // buttonIntern.size(buttonSize, 80);
+  // buttonIntern.style('background-color', bleu);
+  // buttonIntern.mousePressed(sauvegarderIntern);
 
   pg = createGraphics(1500, 2121);
   pgIntern = createGraphics(1500, 2121);
@@ -846,13 +855,13 @@ function dessineTout(graf, isIntern) {
     let entourage = 2;
     noStroke();
     fill(164,186,0); // vert
-    rect(100-entourage, 100-entourage, 1500 / 2 +2*entourage, 2121 / 2 +2*entourage);
+    rect(100-entourage, 10-entourage, 1500 / 2 +2*entourage, 2121 / 2 +2*entourage);
 
     fill(57,182,184); // bleu
-    rect(900-entourage, 100-entourage, 1500 / 2 +2*entourage, 2121 / 2 +2*entourage);
+    rect(900-entourage, 10-entourage, 1500 / 2 +2*entourage, 2121 / 2 +2*entourage);
 
-    image(pg, 100, 100, 1500 / 2, 2121 / 2);
-    image(pgIntern, 900, 100, 1500 / 2, 2121 / 2);
+    image(pg, 100, 10, 1500 / 2, 2121 / 2);
+    image(pgIntern, 900, 10, 1500 / 2, 2121 / 2);
 
 
 
@@ -860,10 +869,10 @@ function dessineTout(graf, isIntern) {
     overDetected = false;
     cursor('default');
     for (i = 0; i < events.length; i++) {
-      if (events[i].rect !== undefined && overText(events[i].rect.x / 2 + 100, events[i].rect.y / 2 + 100, events[i].rect.w / 2, events[i].rect.h / 2)) {
+      if (events[i].rect !== undefined && overText(events[i].rect.x / 2 + 100, events[i].rect.y / 2 + 10, events[i].rect.w / 2, events[i].rect.h / 2)) {
         noStroke();
         fill(23, 41, 131, 60);
-        rect(events[i].rect.x / 2 + 100, events[i].rect.y / 2 + 100, events[i].rect.w / 2, events[i].rect.h / 2);
+        rect(events[i].rect.x / 2 + 100, events[i].rect.y / 2 + 10, events[i].rect.w / 2, events[i].rect.h / 2);
         eventOverID = i;
         overDetected = true;
         cursor('pointer');
@@ -876,7 +885,7 @@ function dessineTout(graf, isIntern) {
       stroke(23, 41, 131);
       strokeWeight(2);
       noFill();
-      rect(events[eventPressedID].rect.x / 2 + 100, events[eventPressedID].rect.y / 2 + 100, events[eventPressedID].rect.w / 2, events[eventPressedID].rect.h / 2);
+      rect(events[eventPressedID].rect.x / 2 + 100, events[eventPressedID].rect.y / 2 + 10, events[eventPressedID].rect.w / 2, events[eventPressedID].rect.h / 2);
 
       //  PanneauOceco();
     }
