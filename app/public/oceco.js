@@ -239,7 +239,7 @@ return false;
 }
 
 async function f() {
-  console.log('AAAAAAAAAAAAAAA');
+  //console.log('AAAAAAAAAAAAAAA');
 
   //let response = await fetch("https://cors-anywhere.herokuapp.com/https://oce.co.tools/api/batchjson/create", {
     let response = await fetch("/oceco/", {
@@ -253,9 +253,9 @@ async function f() {
         Swal.close();
         Swal.fire({
           icon: 'error',
-          title: 'Oops...',
-          text: 'Il y a eu un problème, est ce que tu es sûr.e d\'avoir les droits pour créer dans ce pole oceco ? Erreur : ' + error,
-          footer: 'envoie un mail à guillaume@laraffinerie.re'
+          title: 'La demande n\'a pas pu aboutir',
+          text: 'Vous n\'avez pas les droits pour créer un événement dans ce pole oceco.',
+          footer: 'erreur' + error
         })
         
     });
