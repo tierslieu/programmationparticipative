@@ -584,7 +584,7 @@ function preload() {
   selectMonth.changed(mySelectEvent);
   // select le mois prochain, janvier si on est en décembre
   if (day() > 18)
-    selectMonth.selected((month() + 1) % 12);
+    selectMonth.selected((month() + 1) % 13);
   else
     selectMonth.selected(month());
 
