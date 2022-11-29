@@ -95,6 +95,13 @@ class Evenement {
       this.force = false;
     this.titreEvent = this.titreEvent.replace(/#force/, '');
 
+    // Cherche et supprime le #important
+    if (this.titreEvent.search(/#important/) != -1)
+      this.important = true;
+    else
+      this.important = false;
+    this.titreEvent = this.titreEvent.replace(/#important/, '');
+
     // supprime les @ noms
     let regHash = /(@[A-zÀ-ú\d-.]+)/g;
     if (this.titreEvent.search(regHash) != -1)
@@ -816,9 +823,12 @@ function dessineTout(graf, isIntern) {
           let w = graf.textWidth(events[i].rawDate);
           graf.textFont(fontTypewriter);
           save_ypos = ypos; // Pour le mouseOver 
-          // change la couleur si pas de bienveillant
+          // change la couleur si important
+          if (events[i].important == true)
+            graf.fill(164, 186, 0);
+          // change la couleur si pas de bienveillant            
           if ((events[i].bienveillant == false || events[i].eventOK == false) && events[i].force == false)
-            graf.fill(255, 0, 0);
+            graf.fill(255, 0, 0);          
           if (events[i].nbLines !== undefined && !isIntern) {
             graf.textWrap(WORD);
             graf.textLeading(taillePolice);
