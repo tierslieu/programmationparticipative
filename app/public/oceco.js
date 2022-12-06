@@ -294,7 +294,7 @@ async function f() {
           icon: 'error',
           title: 'Oops...',
           text: 'Il y a eu un problème avec le résultat : ' + result.error,
-          footer: 'envoie un mail à <a href=' + encodeURI('mailto:guillaume@laraffinerie.re?subject=erreur avec le programme&body=' + JSON.stringify(result.details[0])) + '> Guillaume le développeur de cet outil</a>'
+          footer: 'envoie un mail à <a href=' + encodeURI('mailto:guillaume@laraffinerie.re?subject=erreur avec le programme&body=' + JSON.stringify(result.error) + '> Guillaume le développeur de cet outil</a>'
         })
       }
     }
