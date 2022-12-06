@@ -164,7 +164,7 @@ function showInputsEvenement(event) {
        selectPole.addOption({groupe:'Communs', value:'6253caa8226b3b67fc25fcba', text:'Location'});
 
 
-       selectPole.addOption({groupe:'Micro-Recyclerie', value:'615f4ebc4ebb2837582d8a66', text:'Textile'});
+       selectPole.addOption({groupe:'Micro-Recyclerie', value:'63342067f9e2dc0dcb349792', text:'Textile'});
        selectPole.addOption({groupe:'Micro-Recyclerie', value:'615d7ac26beb295c7d13f65f', text:'Vélo'});
        selectPole.addOption({groupe:'Micro-Recyclerie', value:'615d8cba2ed88434fa27e349', text:'Fablab'});
        selectPole.addOption({groupe:'Micro-Recyclerie', value:'5bdc957640bb4e9e79eefccb', text:'Chantier participatif'});
