@@ -147,7 +147,7 @@ template = new Map([
         minuteFinEnAvance: 0,
       },
       {
-        name: "Bienveillant orga",
+        name: "Référent orga",
         description: "Nécessite d'avoir participé à une formation sur le role de bienveillant",
         min: 1,
         max: 2,
@@ -159,7 +159,7 @@ template = new Map([
         creditFixe: 0,
       },
       {
-        name: "Bienveillant snack",
+        name: "Référent snack",
         description: "Nécessite d'avoir participé à une formation sur le role de bienveillant",
         min: 1,
         max: 2,
@@ -171,7 +171,7 @@ template = new Map([
         creditFixe: 0,
       },
       {
-        name: "Bienveillant bar",
+        name: "Référent bar",
         description: "Nécessite d'avoir participé à une formation sur le role de bienveillant",
         min: 1,
         max: 2,
@@ -183,7 +183,7 @@ template = new Map([
         creditFixe: 0,
       },
       {
-        name: "Bienveillant accueil",
+        name: "Référent accueil",
         description: "Nécessite d'avoir participé à une formation sur le role de bienveillant",
         min: 1,
         max: 2,
