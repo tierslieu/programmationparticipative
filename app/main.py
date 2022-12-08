@@ -36,11 +36,11 @@ async def oceco_auth(user, passwd):
 ## batch
 ###################
 async def oceco_batch(id, token, data):
-    async with httpx.AsyncClient(timeout=60.0) as client:
+    async with httpx.AsyncClient(timeout=90.0) as client:
         url = 'https://oce.co.tools/api/batchjson/create'
         headers = {'x-user-id' : id, 'x-access-token' : token, 'Content-Type' : 'application/json'}
         
-        res = await client.post(url, json=data, headers=headers, timeout=60.0) 
+        res = await client.post(url, json=data, headers=headers, timeout=90.0) 
         return res
 
 ######################################
