@@ -196,6 +196,10 @@ class Evenement {
     this.endHour = this.heureFin + ':' + this.minuteFin;
     this.startHour = this.heureDebut + ':' + this.minuteDebut;
 
+    var myStartDate = new Date(Date.parse(this.startDate));
+    if (!dateIsValid(myStartDate))
+      this.eventOK = false;
+
     if (!this.eventOK) {
       let today = new Date();
       this.startDate = today.toISOString(); // Default
@@ -549,6 +553,10 @@ function calculTimeDiff(day, startHour, endHour) {
   var endDate = day.substring(0, 11) + endHour;
   var startDate = day.substring(0, 11) + startHour;
   return ceil((Date.parse(endDate) - Date.parse(startDate)) / 1000 / 60 / 60)
+}
+
+function dateIsValid(date) {
+  return date instanceof Date && !isNaN(date);
 }
 
 function addToDate(date, minutes) {
