@@ -603,8 +603,8 @@ function preload() {
   else
     selectMonth.selected(month());
 
-  imgBackgroundJaune = loadImage("fond-programme-2.jpg");
-  imgBackgroundBleu = loadImage("programme-fond-1.jpg");
+  imgBackgroundJaune = loadImage("fond-programme-2-facebook.jpg");
+  imgBackgroundBleu = loadImage("programme-fond-1-facebook.jpg");
   imgBackgroundInterneBleu = loadImage("programme fond 2022 bleu.jpg")
   selectMonth.hide();
 

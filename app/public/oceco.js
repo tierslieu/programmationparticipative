@@ -179,6 +179,7 @@ function showInputsEvenement(event) {
     selectPole.addOption({groupe:'Raffineurs', value:'5f606679690864bd418b4708', text:'Alimentation'});
     selectPole.addOption({groupe:'Raffineurs', value:'6328cb8d4c1d4e704e7ea4da', text:'Sport'});
     selectPole.addOption({groupe:'Raffineurs', value:'6328cb4e4c1d4e704e7ea495', text:'Culture'});
+    selectPole.addOption({groupe:'Raffineurs', value:'6421b5e6f0acb433df2240a5', text:'Micro-recyclerie'});
     selectPole.addOption({groupe:'Raffineurs', value:'6328cbc14c1d4e704e7ea4e6', text:'Communs'});
 
   }
