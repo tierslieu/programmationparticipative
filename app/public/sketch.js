@@ -149,20 +149,17 @@ class Evenement {
         this.moisOK = true;
       else this.moisOK = false;
 
-      if (this.jour.length == 1) this.jour = "0" + this.jour;
-      if (this.heureDebut.length == 1) this.heureDebut = "0" + this.heureDebut;
-      if (this.heureFin.length == 1) this.heureFin = "0" + this.heureFin;
-      if (this.minuteDebut.length == 1) this.minuteDebut = "0" + this.minuteDebut;
-      if (this.minuteFin.length == 1) this.minuteFin = "0" + this.minuteFin;
       if (this.minuteDebut == "") this.minuteDebut = "00";
       if (this.heureFin == "") {
         this.heureFin = (parseInt(this.heureDebut, 10) + 2).toString();
         this.minuteFin = this.minuteDebut;
       }
       if (this.minuteFin == "") this.minuteFin = "00";
-
-
-
+      if (this.jour.length == 1) this.jour = "0" + this.jour;
+      if (this.heureDebut.length == 1) this.heureDebut = "0" + this.heureDebut;
+      if (this.heureFin.length == 1) this.heureFin = "0" + this.heureFin;
+      if (this.minuteDebut.length == 1) this.minuteDebut = "0" + this.minuteDebut;
+      if (this.minuteFin.length == 1) this.minuteFin = "0" + this.minuteFin;
     }
 
     if (this.eventOK == false && !this.force) {
