@@ -387,7 +387,7 @@ class Reunion extends Evenement {
     this.type = paragraphName;
     this.slug = "Réunion";
     this.maxWidth = ((1500 - 80) / 2) - this.dateWidth;
-    this.calcul2colonnes();
+    //this.calcul2colonnes();
 
     // OCECO
     this.poleID = "";
@@ -586,6 +586,10 @@ function toDateOceco(day, hour) {
 /**************************************************/
 
 function preload() {
+  var json = []
+  fetch('./conf.json').then(response => json = response.json())
+  console.log(json)
+
   fontTypewriter = loadFont("JMH Typewriter dry.otf");
   fontLove = loadFont("A Love of Thunder.ttf");
   lines = loadStrings("https://nuage.tierslieux.re/s/p8MPmkbT4xtK5X5/download");
