@@ -973,7 +973,7 @@ function dessineTout(graf, isIntern) {
   }
 
   function modifier() {
-    window.open("https://nuage.tierslieux.re/s/p8MPmkbT4xtK5X5");
+    window.open("https://nuage.tierslieux.re/f/1000084");
   }
 
   function overText(x, y, w, h) {
