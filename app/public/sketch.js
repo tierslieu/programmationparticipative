@@ -101,17 +101,18 @@ class Evenement {
     else
       this.important = false;
     this.titreEvent = this.titreEvent.replace(/#important/, '');
-
     // Pour savoir si un nom de bienveillant est cité comme référent de cet event (sinon affichage en rouge)
     this.bienveillant = false;
-    // supprime les @ noms
-    let regHash = /(@[A-zÀ-ú\d-.]+)/g;
-    if (this.titreEvent.search(regHash) != -1)
-      this.bienveillant = true;
-    this.titreEvent = this.titreEvent.replaceAll(regHash, '');
 
     // Supprime les @ noms qui ont le formattage user de Nextcloud (un lien markdown avec une url en mention://xxx )
-    regHash = /@\[([\w\s\d]+)\]\(((?:\/|(mention)?:\/\/)[\w\d.\/?=#]+)\)/g;
+    let regHash = /@\[([\w\s\d]+)\]\(((?:\/|(mention)?:\/\/)[\w\d.\/?=#]+)\)/g;
+    if (this.titreEvent.search(regHash) != -1) {
+      this.bienveillant = true;
+      this.titreEvent = this.titreEvent.replaceAll(regHash, '');
+    }
+
+    // supprime les @ noms
+    regHash = /(@[A-zÀ-ú\d-.]+)/g;
     if (this.titreEvent.search(regHash) != -1)
       this.bienveillant = true;
     this.titreEvent = this.titreEvent.replaceAll(regHash, '');
