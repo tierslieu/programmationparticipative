@@ -111,7 +111,7 @@ class Evenement {
     this.titreEvent = this.titreEvent.replaceAll(regHash, '');
 
     // Supprime les @ noms qui ont le formattage user de Nextcloud (un lien markdown avec une url en mention://xxx )
-    let regHash = /@\[([\w\s\d]+)\]\(((?:\/|(mention)?:\/\/)[\w\d.\/?=#]+)\)/g;
+    regHash = /@\[([\w\s\d]+)\]\(((?:\/|(mention)?:\/\/)[\w\d.\/?=#]+)\)/g;
     if (this.titreEvent.search(regHash) != -1)
       this.bienveillant = true;
     this.titreEvent = this.titreEvent.replaceAll(regHash, '');
