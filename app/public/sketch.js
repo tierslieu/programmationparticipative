@@ -101,7 +101,6 @@ class Evenement {
     else
       this.important = false;
     this.titreEvent = this.titreEvent.replace(/#important/, '');
-
     // Pour savoir si un nom de bienveillant est cité comme référent de cet event (sinon affichage en rouge)
     this.bienveillant = false;
 
