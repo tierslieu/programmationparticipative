@@ -592,7 +592,7 @@ function preload() {
 
   fontTypewriter = loadFont("JMH Typewriter dry.otf");
   fontLove = loadFont("A Love of Thunder.ttf");
-  lines = loadStrings("https://nuage.tierslieux.re/s/p8MPmkbT4xtK5X5/download");
+  lines = loadStrings("https://nuage.tierslieux.re/s/TJerjSiDnfEjac5/download");
 
   selectMonth = createSelect();
   selectMonth.position(10, 2323);
@@ -973,7 +973,7 @@ function dessineTout(graf, isIntern) {
   }
 
   function modifier() {
-    window.open("https://nuage.tierslieux.re/f/1000084");
+    window.open("https://nuage.tierslieux.re/f/1990599");
   }
 
   function overText(x, y, w, h) {
