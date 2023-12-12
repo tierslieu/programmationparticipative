@@ -127,61 +127,21 @@ function showInputsEvenement(event) {
   if (!event.interne) {
     selectPole.clear();; // enleve selection courante pour le clearOptions
     selectPole.clearOptions(); // Vide la liste
-    //selectPole.addOptionGroup("Fréquents", {label: 'Fréquents'});
-    //selectPole.addOptionGroup("Jardin", {label: 'Jardin'});
+    selectPole.addOptionGroup("Café", {label: 'Café'});
+    selectPole.addOptionGroup("Yourte", {label: 'Yourte'});
+    
+    selectPole.addOption({groupe:'Café', value:'643456f10df7ba104730282f', text:'Achat groupé'});
+    selectPole.addOption({groupe:'Café', value:'643456b10df7ba1047302826', text:'La cocote'});
+    selectPole.addOption({groupe:'Café', value:'64345f02599b4a32be283122', text:'Le café'});
 
-    selectPole.addOption({groupe:'Fréquents', value:'5e4d842d690864aa088b4b01', text:'Café culturel'});
-    selectPole.addOption({groupe:'Fréquents', value:'5bdc957640bb4e9e79eefccb', text:'Chantier participatif'});
-    selectPole.addOption({groupe:'Jardin', value:'5fae4a346908644d478b45b1', text:'Champignonière'});
-    //selectPole.addOption({groupe:'Fréquents', value:'5bdc957640bb4e9e79eefccb', text:''});
-    //selectPole.addOption({groupe:'Fréquents', value:'5bdc957640bb4e9e79eefccb', text:''});
-    //selectPole.addOption({groupe:'Fréquents', value:'5bdc957640bb4e9e79eefccb', text:''});
-    selectPole.addOption({groupe:'Jardin', value:'6172b0c519ba2c0a750c5c4a', text:'Pépinière'});
-    selectPole.addOption({groupe:'Jardin', value:'5e4232ec69086452078b46d0', text:'Potager'});
-    selectPole.addOption({groupe:'Jardin', value:'5fae47bc6908644d478b4598', text:'Rucher'});
-    selectPole.addOption({groupe:'Jardin', value:'5e650e3469086440318b45b3', text:'Serre aquaponique'});
-    selectPole.addOption({groupe:'Jardin', value:'5e4ff86a69086495528b4592', text:'Micro-Forêt'});
-
-    selectPole.addOption({groupe:'Culture', value:'6208fa07506b8728f321fd55', text:'Groupe Culture'});
-    selectPole.addOption({groupe:'Culture', value:'5e4d842d690864aa088b4b01', text:'Café culturel'});
-    selectPole.addOption({groupe:'Culture', value:'6208f7f761387739e675f98a', text:'Culture Lab'});
-    selectPole.addOption({groupe:'Culture', value:'5bd2bcfb40bb4e4509f7eabe', text:'AMAC'});
-    selectPole.addOption({groupe:'Culture', value:'5c03d0a140bb4eba4549a633', text:'Cinéma plein air'});
-    selectPole.addOption({groupe:'Culture', value:'615d60cef1ddbd5bb32ce698', text:'MédiaLab'});
-
-    selectPole.addOption({groupe:'Alimentation', value:'5bd2bfa640bb4ecb09f7eabe', text:'AMAP'});
-    selectPole.addOption({groupe:'Alimentation', value:'5f9fda7d6908646a498b457c', text:'Laboratoire de transformation alimentaire'});
-    selectPole.addOption({groupe:'Alimentation', value:'5e4d8a8b690864aa088b4d6e', text:'Micro-brasserie'});
-    selectPole.addOption({groupe:'Alimentation', value:'5bdd92bc40bb4e16195d83fe', text:'Café resto'});
-
-
-       selectPole.addOption({groupe:'Communs', value:'5fae52a769086444478b45cc', text:'Interpoles'});
-       selectPole.addOption({groupe:'Communs', value:'5df793ee690864ad568b45e1', text:'La Poule Comm'});
-       selectPole.addOption({groupe:'Communs', value:'5c5862dd40bb4e591f69a820', text:'Les outils numériques'});
-       selectPole.addOption({groupe:'Communs', value:'5c461b1140bb4ed64e123ae8', text:'Travaux'});
-       selectPole.addOption({groupe:'Communs', value:'6253cf64686f1870cd4aefe5', text:'Formation'});
-       selectPole.addOption({groupe:'Communs', value:'6253caa8226b3b67fc25fcba', text:'Location'});
-
-
-       selectPole.addOption({groupe:'Micro-Recyclerie', value:'63342067f9e2dc0dcb349792', text:'Textile'});
-       selectPole.addOption({groupe:'Micro-Recyclerie', value:'615d7ac26beb295c7d13f65f', text:'Vélo'});
-       selectPole.addOption({groupe:'Micro-Recyclerie', value:'615d8cba2ed88434fa27e349', text:'Fablab'});
-       selectPole.addOption({groupe:'Micro-Recyclerie', value:'5bdc957640bb4e9e79eefccb', text:'Chantier participatif'});
-
-       selectPole.addOption({groupe:'CA', value:'5be5d3f340bb4e3848ef67f3', text:'Conseil d\'administration'});
+    selectPole.addOption({groupe:'Yourte', value:'64345c3d599b4a32be2830f3', text:'La yourte'});
     
   }
   else {
     selectPole.clear();; // enleve selection courante pour le clearOptions
     selectPole.clearOptions(); // Vide la liste
-    selectPole.addOption({groupe:'Raffineurs', value:'5f606584690864b1418b469d', text:'Jardin'});
-    selectPole.addOption({groupe:'Raffineurs', value:'5f606679690864bd418b4708', text:'Alimentation'});
-    selectPole.addOption({groupe:'Raffineurs', value:'6328cb8d4c1d4e704e7ea4da', text:'Sport'});
-    selectPole.addOption({groupe:'Raffineurs', value:'6328cb4e4c1d4e704e7ea495', text:'Culture'});
-    selectPole.addOption({groupe:'Raffineurs', value:'6421b5e6f0acb433df2240a5', text:'Micro-recyclerie'});
-    selectPole.addOption({groupe:'Raffineurs', value:'6328cbc14c1d4e704e7ea4e6', text:'Communs'});
-
   }
+
   var date = new Date(event.startDate);
   select('#titreEvent').html( "Le " + date.getDate() + "/" + (date.getMonth()+1) + "/" + date.getFullYear() + "<br>" + event.titreEvent);
   selectPole.setValue(event.poleID);

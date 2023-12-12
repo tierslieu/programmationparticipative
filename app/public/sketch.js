@@ -82,11 +82,12 @@ class Evenement {
     this.rawDate = this.rawDate.replace(/\*\*/g, '');
 
     // Cherche et supprime le #interne
-    if (this.titreEvent.search(/#interne/) != -1)
+    this.interne = false;
+/*     if (this.titreEvent.search(/#interne/) != -1)
       this.interne = true;
     else
       this.interne = false;
-    this.titreEvent = this.titreEvent.replace(/#interne/, '');
+    this.titreEvent = this.titreEvent.replace(/#interne/, ''); */
 
     // Cherche et supprime le #force
     if (this.titreEvent.search(/#force/) != -1)
@@ -270,9 +271,9 @@ class Evenement {
     let info = {};
 
     let data = {};
-    data.organizations = { _id: "5e40fec1690864bc598b4874" };
-    if (this.interne)
-      data.organizations = { _id: "5f604389690864ba028b483c" };
+    data.organizations = { _id: "61b1ec9654a5b834e522aaaa" }; // ID Oceco de la plume à loup
+    //if (this.interne)
+    //  data.organizations = { _id: "5f604389690864ba028b483c" };
     data.organizations.projects = [];
     data.organizations.projects[0] = {};
     data.organizations.projects[0]._id = this.poleID;
@@ -365,9 +366,8 @@ class Chantier extends Evenement {
     this.maxWidth = ((1500 - 80) / 2) - this.dateWidth;
     this.calcul2colonnes();
 
-    this.poleID = "5bdc957640bb4e9e79eefccb";
-
-    this.description = "Les chantiers participatifs sont des moments conviviaux où chacun.e peut participer quel que soit son niveau de compétence. C'est un des meilleurs moyens de découvrir le projet de La Raffinerie et de rencontrer des personnes. Les actions du chantiers sont très diverses : bois, métal, jardin, cadre de vie, décoration, cuisine ... Les équipes et les missions sont expliquées et distribuées en début de journée après un petit déjeuner participatif. Chacun.e ramène un petit quelque chose. Le chantier participatif finit à midi avec un repas offert par La Raffinerie"
+    this.poleID = "";
+    this.description = ""
 
     // make copy
     this.actions = JSON.parse(JSON.stringify(template.get(this.slug)));
@@ -398,7 +398,7 @@ class Reunion extends Evenement {
 
     // OCECO
     this.poleID = "";
-    this.description = "Les réunions sont ouvertes à toutes et tous, quelque soit votre connaissance du sujet. Les comptes-rendus des réunions précédentes sont accessibles sur le site https://www.laraffinerie.re dans le pole correspondant"
+    this.description = "réunion"
 
     this.actions = JSON.parse(JSON.stringify(template.get(this.slug)));
 
@@ -426,8 +426,8 @@ class Soiree extends Evenement {
     super(rawLine);
     this.type = paragraphName;
     this.slug = "Soirée";
-    this.poleID = "5e4d842d690864aa088b4b01"
-    this.description = "Evénement culturel à La Raffinerie. Pour en savoir plus sur le programme de la soirée : https://www.raffinerie.re"
+    this.poleID = ""
+    this.description = "soirée"
 
     this.actions = JSON.parse(JSON.stringify(template.get(this.slug)));
 
@@ -472,7 +472,7 @@ class Atelier extends Evenement {
     this.type = paragraphName;
     this.slug = "Atelier";
     this.poleID = "";
-    this.description = "Evénement culturel à La Raffinerie. Pour en savoir plus sur le programme de la soirée : https://www.raffinerie.re"
+    this.description = ""
     //this.maxWidth = ((1500 - 80) / 2) - this.dateWidth;
     //this.calcul2colonnes();
 
@@ -500,7 +500,7 @@ class Formation extends Evenement {
     this.slug = "Formation";
 
     this.poleID = "";
-    this.description = "Les formations sont ouvertes à toutes et tous, et elles peuvent être aussi données celles et ceux qui souhaitent partager un savoir-faire, savoir-être, une connaissance etc."
+    this.description = ""
 
 
     this.actions = JSON.parse(JSON.stringify(template.get(this.slug)));
@@ -585,7 +585,7 @@ function calculHalfTime(day, startHour, endHour) {
 }
 
 function toDateOceco(day, hour) {
-  return day.substring(0, 11) + hour + ":00+04:00";
+  return day.substring(0, 11) + hour + ":00+01:00";
 }
 
 /**************************************************/
@@ -595,12 +595,27 @@ function toDateOceco(day, hour) {
 function preload() {
   var json = []
   fetch('./conf.json').then(response => json = response.json())
-  console.log(json)
+  //console.log(json)
+
+/*   let response = fetch("/telecharger-fichier", {
+    method: "GET",
+    headers: {
+      'Content-Type': 'application/json'
+    }})
+  if (response.ok == true){
+    let result = await response.json();
+     console.log(result);
+    if (result.status == true) {
+
+    }
+  } */
+
 
   fontTypewriter = loadFont("JMH Typewriter dry.otf");
   fontLove = loadFont("A Love of Thunder.ttf");
-  lines = loadStrings("https://nuage.tierslieux.re/s/TJerjSiDnfEjac5/download");
-
+  //lines = loadStrings("https://nuage.tierslieux.re/s/TJerjSiDnfEjac5/download");
+  lines = loadStrings("/telecharger-fichier");
+console.log(lines)
   selectMonth = createSelect();
   selectMonth.position(10, 2323);
   for (i = 1; i <= 12; i++) selectMonth.option(monthText[i], i);
@@ -611,9 +626,9 @@ function preload() {
   else
     selectMonth.selected(month());
 
-  imgBackgroundJaune = loadImage("fond-programme-2-facebook.jpg");
-  imgBackgroundBleu = loadImage("programme-fond-1-facebook.jpg");
-  imgBackgroundInterneBleu = loadImage("programme fond 2022 bleu.jpg")
+  imgBackgroundJaune = loadImage("fond-programme-plumealoup.jpg");
+  imgBackgroundBleu = loadImage("fond-programme-plumealoup.jpg");
+  imgBackgroundInterneBleu = loadImage("fond-programme-plumealoup.jpg")
   selectMonth.hide();
 
   //linkQuestion = createA("https://documentation.laraffinerie.re/index.php/Le_programme_mensuel", '<img src=question-mark.png></img>');
@@ -726,23 +741,13 @@ function setup() {
 
   creerInputOceco();
 
-  selectPole = new TomSelect("#selectPole", {
+   selectPole = new TomSelect("#selectPole", {
     onChange: function (value) {
       events[eventPressedID].poleID = value;
 
     },
     optgroupField: 'groupe',
-    optgroups: [
-      {value: 'Fréquents', label: 'Fréquents'},
-      {value: 'Jardin', label: 'Jardin'},
-      {value: 'Culture', label: 'Culture'},
-      {value: 'Alimentation', label: 'Alimentation'},
-      {value: 'Micro-Recyclerie', label: 'Micro-Recyclerie'},
-      {value: 'Communs', label: 'Communs'},
-      {value: 'CA', label: 'CA'},
-      {value: 'Raffineurs', label: 'Raffineurs'},
 
-    ],
     create: false,
 
     render: {
@@ -759,7 +764,7 @@ function setup() {
         return '<div class="no-results">Je ne connais pas de pole ' + (data.input) + '</div>';
       },
     }
-  });
+  }); 
 
 }
 
@@ -980,7 +985,7 @@ function dessineTout(graf, isIntern) {
   }
 
   function modifier() {
-    window.open("https://nuage.tierslieux.re/f/1990599");
+    window.open("https://collab.tiers-lieux.org/s/PXFYPiRsXB2CAmk");
   }
 
   function overText(x, y, w, h) {

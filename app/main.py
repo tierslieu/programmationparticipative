@@ -1,6 +1,7 @@
 from fastapi import  FastAPI
 from fastapi.staticfiles import StaticFiles
 from fastapi import FastAPI, Request, Response
+from fastapi.responses import PlainTextResponse
 import httpx
 import asyncio
 # Use this to serve a public/index.html
@@ -13,7 +14,7 @@ app.mount("/public", StaticFiles(directory="/app/public"), name="public")
 ######################################
 @app.get("/")
 async def read_index():
-    return RedirectResponse(url="/public/index.html?v=47")   
+    return RedirectResponse(url="/public/index.html?v=48")   
 
 ###################
 ## authentification
@@ -66,3 +67,16 @@ async def api_data(info: Request):
     resp_batch_json = resp_batch.json()
     print(resp_batch_json)
     return resp_batch_json
+
+######################################
+@app.get("/telecharger-fichier", response_class=PlainTextResponse)
+async def telecharger_fichier():
+    url = "https://collab.tiers-lieux.org/s/PXFYPiRsXB2CAmk/download"
+    
+    async with httpx.AsyncClient() as client:
+        response = await client.get(url)
+        if response.status_code == 200:
+            # Renvoyer le contenu du fichier en tant que réponse
+            return response.text
+        else:
+            return "erreur Impossible de télécharger le fichier"
