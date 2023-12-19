@@ -711,7 +711,7 @@ function setup() {
   if (moisPrecedent == 0)
     moisPrecedent = 12
   let anneeSuivante = int(annee) + (moisSuivant==1?1:0);
-  let anneePrecedente = int(annee) - (moisSuivant==12?1:0);
+  let anneePrecedente = int(annee) - (moisPrecedent==12?1:0);
   select('#buttonNext').attribute('href', '?mois=' + moisSuivant + '&annee=' + anneeSuivante);
   select('#buttonPrev').attribute('href', '?mois=' + moisPrecedent + '&annee=' + anneePrecedente);
 
