@@ -706,10 +706,12 @@ function setup() {
   select('#buttonEdit').style('background', 'linear-gradient(to right,'+col+' 30%, rgb(57,182,184) 70%)');
   select('#buttonSave2').style('background-color', bleu);
 
-  let moisSuivant = (mois + 1) % 13;
-  let moisPrecedent = (mois - 1) % 13;
-  let anneeSuivante = annee + (moisSuivant==1?1:0);
-  let anneePrecedente = annee - (moisSuivant==12?1:0);
+  let moisSuivant = (int(mois) + 1) % 13;
+  let moisPrecedent = (int(mois) - 1);
+  if (moisPrecedent == 0)
+    moisPrecedent = 12
+  let anneeSuivante = int(annee) + (moisSuivant==1?1:0);
+  let anneePrecedente = int(annee) - (moisSuivant==12?1:0);
   select('#buttonNext').attribute('href', '?mois=' + moisSuivant + '&annee=' + anneeSuivante);
   select('#buttonPrev').attribute('href', '?mois=' + moisPrecedent + '&annee=' + anneePrecedente);
 
