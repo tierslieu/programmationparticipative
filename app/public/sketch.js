@@ -706,9 +706,13 @@ function setup() {
   select('#buttonEdit').style('background', 'linear-gradient(to right,'+col+' 30%, rgb(57,182,184) 70%)');
   select('#buttonSave2').style('background-color', bleu);
 
-  select('#buttonPrev').style('background-color', col);
-  select('#buttonNext').style('background-color', bleu);
-  select('#buttonNext').attribute('href', "www.perdu.com");
+  let moisSuivant = (mois + 1) % 13;
+  let moisPrecedent = (mois - 1) % 13;
+  let anneeSuivante = annee + (moisSuivant==1?1:0);
+  let anneePrecedente = annee - (moisSuivant==12?1:0);
+  select('#buttonNext').attribute('href', '?mois=' + moisSuivant + '&annee=' + anneeSuivante);
+  select('#buttonPrev').attribute('href', '?mois=' + moisPrecedent + '&annee=' + anneePrecedente);
+
 
   // button = createButton('<i class="fa fa-download fa-lg"></i>  &nbsp; Programme public');
   // button.addClass('actionButton');
