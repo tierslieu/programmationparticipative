@@ -796,7 +796,7 @@ function dessineTout(graf, isIntern) {
   graf.textSize(64);
   graf.textLeading(64);
   graf.textAlign(CENTER);
-  graf.text("< " + (isIntern?"Interne ":"Programme de ") + monthText[mois] + " " + annee + " >",
+  graf.text("< " + (isIntern?"Interne   ":"Programme de ") + monthText[mois] + " " + annee + " >",
     442,
     220,
     625);
