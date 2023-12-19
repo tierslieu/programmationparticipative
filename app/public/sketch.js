@@ -706,7 +706,7 @@ function setup() {
   select('#buttonEdit').style('background', 'linear-gradient(to right,'+col+' 30%, rgb(57,182,184) 70%)');
   select('#buttonSave2').style('background-color', bleu);
 
-  let moisSuivant = (int(mois) + 1) % 13;
+  let moisSuivant = (int(mois) % 12) + 1;
   let moisPrecedent = (int(mois) - 1);
   if (moisPrecedent == 0)
     moisPrecedent = 12
