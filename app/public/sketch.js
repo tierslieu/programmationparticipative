@@ -610,6 +610,13 @@ function preload() {
     }
   } */
 
+  // Obtenir la chaîne de requête
+  const queryString = window.location.search;
+  // Créer une instance de URLSearchParams
+  const urlParams = new URLSearchParams(queryString);
+  // Récupérer des valeurs spécifiques
+  const mois = urlParams.get('mois');
+  const annee = urlParams.get('annee');
 
   fontTypewriter = loadFont("JMH Typewriter dry.otf");
   fontLove = loadFont("A Love of Thunder.ttf");
@@ -699,6 +706,9 @@ function setup() {
   select('#buttonEdit').style('background', 'linear-gradient(to right,'+col+' 30%, rgb(57,182,184) 70%)');
   select('#buttonSave2').style('background-color', bleu);
 
+  select('#buttonPrev').style('background-color', col);
+  select('#buttonNext').style('background-color', bleu);
+  select('#buttonNext').attribute('href', "www.perdu.com");
 
   // button = createButton('<i class="fa fa-download fa-lg"></i>  &nbsp; Programme public');
   // button.addClass('actionButton');
