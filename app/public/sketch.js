@@ -615,8 +615,8 @@ function preload() {
   // Créer une instance de URLSearchParams
   const urlParams = new URLSearchParams(queryString);
   // Récupérer des valeurs spécifiques
-  const mois = urlParams.get('mois');
-  const annee = urlParams.get('annee');
+  mois = urlParams.get('mois');
+  annee = urlParams.get('annee');
 
   fontTypewriter = loadFont("JMH Typewriter dry.otf");
   fontLove = loadFont("A Love of Thunder.ttf");
